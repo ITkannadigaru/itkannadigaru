@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Stats from "@/components/Stats";
 import Playlists from "@/components/Playlists";
+import Roadmap from "@/components/Roadmap";
 
 function Placeholder({ id, title }: { id: string; title: string }) {
   return (
@@ -23,7 +24,7 @@ export default function Home() {
       <Stats />
       <Placeholder id="about" title="About Me" />
       <Placeholder id="courses" title="Courses" />
-      <Placeholder id="roadmaps" title="Learning Roadmaps" />
+      <Roadmap />
       <Playlists />
       <Placeholder id="projects" title="Projects" />
       <Placeholder id="community" title="Community" />

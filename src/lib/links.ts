@@ -48,8 +48,8 @@ export const PLAYLISTS = [
     difficulty: "All Levels",
   },
   {
-    title: "Generative AI Course",
-    url: "https://www.youtube.com/watch?v=I_moN3K5xkg&list=PLb7POK22N8U0",
-    difficulty: "Beginner to Advanced",
+    title: "Python for AI — Phase 1 (14 Videos)",
+    url: "https://www.youtube.com/watch?v=4FLwPm0oeFs&list=PLb7POK22N8U0",
+    difficulty: "Beginner",
   },
 ];
