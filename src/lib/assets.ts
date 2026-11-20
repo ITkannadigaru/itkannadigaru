@@ -1,3 +1,6 @@
+const BASE_PATH = "/itkannadigaru";
+
 export function assetPath(path: string) {
-  return path.startsWith("/") ? path : `/${path}`;
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  return `${BASE_PATH}${normalizedPath}`;
 }
