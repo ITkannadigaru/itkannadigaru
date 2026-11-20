@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
-// Custom domain www.itkannadigaru.in serves from root — no basePath needed.
 const nextConfig: NextConfig = {
+  basePath: "/itkannadigaru",
   output: "export",
   images: {
     unoptimized: true,
