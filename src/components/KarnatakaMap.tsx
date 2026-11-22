@@ -1,43 +1,39 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Image from "next/image";
 import { assetPath } from "@/lib/assets";
 
 export default function KarnatakaMap() {
   return (
-    <motion.div
-      className="relative mx-auto h-full w-full max-w-[460px]"
-      animate={{ y: [0, -18, 0] }}
-      transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-    >
-      <div
-        className="animate-map-glow relative h-full w-full"
-        style={{ filter: "drop-shadow(0 0 45px rgba(255,209,0,0.3))" }}
-      >
+    <div className="map-stage relative mx-auto h-full w-full max-w-[500px]">
+      <div className="map-aura" aria-hidden="true" />
+      <div className="map-orbit map-orbit-outer" aria-hidden="true" />
+      <div className="map-orbit map-orbit-inner" aria-hidden="true" />
+      <div className="map-floor" aria-hidden="true" />
+      <div className="map-particles" aria-hidden="true">
+        <span /><span /><span /><span /><span /><span /><span /><span />
+      </div>
+      <div className="map-float absolute inset-0">
         <Image
           src={assetPath("/images/karnataka-map-glow.png")}
-          alt="Glowing golden Karnataka map made of circuit-board traces, fading into a red glow at the base"
+          alt=""
           fill
           priority
-          className="object-contain"
+          sizes="(max-width: 640px) 90vw, 500px"
+          className="object-contain mix-blend-screen"
         />
+        <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+          <div className="max-w-[74%] -translate-y-1">
+            <p lang="kn" className="font-kannada text-xl font-extrabold leading-snug text-yellow [text-shadow:0_2px_16px_#000,0_0_24px_rgba(255,209,0,0.55)] sm:text-2xl">
+              ಕನ್ನಡಿಗನಿಂದ
+              <br />
+              ಕನ್ನಡಿಗರಿಗಾಗಿ
+            </p>
+            <span className="mx-auto mt-3 block h-px w-12 bg-yellow/70" />
+            <p className="mt-3 text-[10px] font-semibold tracking-wide text-white [text-shadow:0_2px_8px_#000] sm:text-xs">
+              By a Kannadiga,<br />for Kannadigas.
+            </p>
+          </div>
+        </div>
       </div>
-
-      {/* Centered Kannada + English identity text */}
-      <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-8 text-center">
-        <p className="animate-fade-in-up animate-glow-pulse font-kannada text-3xl font-extrabold leading-snug text-yellow sm:text-4xl lg:text-5xl">
-          ಕನ್ನಡಿಗನಿಂದ
-          <br />
-          ಕನ್ನಡಿಗರಿಗಾಗಿ
-        </p>
-        <span className="mt-5 h-px w-16 bg-yellow/60" />
-        <p className="animate-fade-in-up mt-5 text-sm font-medium tracking-wide text-white sm:text-base">
-          By a Kannadiga,
-          <br />
-          For Kannadigas.
-        </p>
-      </div>
-    </motion.div>
+    </div>
   );
 }

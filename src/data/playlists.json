@@ -1,0 +1,527 @@
+{
+  "ai-engineering": {
+    "playlistId": "PLOg6j3XLQi3s",
+    "videos": [
+      {
+        "id": "HU2hK-IbIzM",
+        "title": "DAY-1 | AI vs ML vs Deep Learning vs GenAI Explained in Kannada | 2026 | ITKannadigaru"
+      },
+      {
+        "id": "c0lIwvLHvNE",
+        "title": "DAY-2 | How LLM Works & Predicts the Next Token Explained in Kannada | AI Series | ITKannadigaru"
+      },
+      {
+        "id": "r3rnJRi56WE",
+        "title": "DAY-3 | Transformers Explained in Kannada| AI Series | ITKannadigaru"
+      },
+      {
+        "id": "Fxrk4kT8UhQ",
+        "title": "DAY-4 | Transformer Encoder & Decoder Explained + Build Your First AI Chatbot | ITKannadigaru"
+      },
+      {
+        "id": "npG3ljjsfGI",
+        "title": "DAY-5 | Invoke OpenAI & Ollama Models + Prompt Engineering Basics | ITKannadigaru"
+      },
+      {
+        "id": "JwAZU7XlzPE",
+        "title": "Day-6 | Prompt Engineering | Zero-Shot, One-Shot, Few-Shot & CoT Explained | Kannada | ITKannadigaru"
+      },
+      {
+        "id": "l1hSOdPXc0M",
+        "title": "Day-7 | Role-Based, Persona-Based & Output Formatting in Prompt Engineering | Kannada| ITKannadigaru"
+      },
+      {
+        "id": "sFypd1MT5QQ",
+        "title": "Day-8 | ReAct & ToT Prompting Techniques | Constraints & Controls in Prompt Engineering |Kannada|ITK"
+      },
+      {
+        "id": "g0deUXIuAgk",
+        "title": "Day-9 | Introduction to RAG (Retrieval Augmented Generation) | GenAI Full Course in Kannada | ITK"
+      },
+      {
+        "id": "HAynEgd8cq0",
+        "title": "Day-10 | RAG |LangChain Framework | Documents, TextLoader & DirectoryLoader | GenAI in Kannada | ITK"
+      },
+      {
+        "id": "sIz8Z5-6lqo",
+        "title": "Day-11 | LangChain Text Splitting Techniques | Document Loading  | GenAI in Kannada | ITKannadigaru"
+      },
+      {
+        "id": "j6u8yj5RUt8",
+        "title": "Day-12 | LangChain PDF Loader, PDF Splitting & PDF Cleaning | GenAI Full Course in Kannada | ITK"
+      },
+      {
+        "id": "pRqRpgaIwmw",
+        "title": "Day-13 | LangChain Word, CSV & Excel Document Loading + Splitting | GenAI Course in Kannada | ITK"
+      },
+      {
+        "id": "CIgW92G5Iyo",
+        "title": "Day-14 | Vector Database, Embeddings, Dimensions & Cosine Similarity | GenAI  in Kannada | ITK"
+      },
+      {
+        "id": "4-vKtFGJLkY",
+        "title": "Day-15 | How to Create Vector Embeddings Using OpenAI & Hugging Face | GenAI in Kannada | ITK"
+      },
+      {
+        "id": "Z5cssSuzhAM",
+        "title": "Day-16 |  Complete RAG Application with LangChain, ChromaDB & Hugging Face | GenAI  in Kannada | ITK"
+      },
+      {
+        "id": "AQ2IKpmGQb8",
+        "title": "Day-17 | Complete RAG Pipeline Using OpenAI Embeddings & Open Models |GENAI in Kannada | ITK"
+      },
+      {
+        "id": "Qti_QsWLWuI",
+        "title": "Day-18 | Data Ingestion & Conversation Memory in RAG | Generative AI Course in Kannada | ITK"
+      },
+      {
+        "id": "ny_ZN3VPP7Q",
+        "title": "Day-19 | Pinecone & Astra DB Tutorial | Vector Databases for RAG | GenAI Course in Kannada | ITK"
+      },
+      {
+        "id": "emNbK2Z_oSM",
+        "title": "Day-20 | Advanced Chunking & Semantic Chunking in RAG | Generative AI Course in Kannada | ITK"
+      },
+      {
+        "id": "APSAWfGDY0U",
+        "title": "Day-21 | Advanced Retrieval Techniques in RAG | Dense vs Sparse, NLP & TF-IDF in Kannada | ITK"
+      },
+      {
+        "id": "Hrb5b_lWfJo",
+        "title": "Day-22 |Hybrid Retrieval in RAG | Dense vs Sparse, BM25 & Ensemble Retriever in Kannada| ITK"
+      },
+      {
+        "id": "gwyHg0OHnyQ",
+        "title": "Day-23 |Hybrid RAG + LLM Reranking in LangChain | BM25 + FAISS + Groq | GenAI Course in Kannada"
+      },
+      {
+        "id": "z_ioeDW9EKM",
+        "title": "Day 24 | Multimodal RAG Using CLIP, Text & Images | GenAI Course in Kannada | ITKannadigaru"
+      },
+      {
+        "id": "ykJj1jBJ-wc",
+        "title": "Day 25 |AI Agents vs Agentic AI Explained| Build Your First AI Agent with Weather & Web Search Tools"
+      },
+      {
+        "id": "_JRLLwyQdxg",
+        "title": "Day-26 | LangChain Model Integration | Batch, Stream, Invoke & AI Messages Explained in Kannada|ITK"
+      },
+      {
+        "id": "QJReolcjyjI",
+        "title": "DAY-27 | LangChain Tools & Middleware Explained | Summarization Middleware | Agentic AI in Kannada"
+      },
+      {
+        "id": "VrP72_2hXvM",
+        "title": "DAY-28 | LangGraph Introduction & Build Your First AI Agent | Agentic AI Series in Kannada | ITK"
+      }
+    ]
+  },
+  "kubernetes-cka": {
+    "playlistId": "PLaZfMOMvbDOZas6hEZ4_G-JH8FhpzmYQA",
+    "videos": [
+      {
+        "id": "fnS7kv1Djgo",
+        "title": "CKA Series | Day-1 | Docker Basics in Kannada 🔥 | VM vs Container Explained | 2026"
+      },
+      {
+        "id": "kbW52_R41VU",
+        "title": "CKA Series | Day-2 | Docker Basics in Kannada 🔥 | Docker Commands | 2026"
+      },
+      {
+        "id": "5yitHXop-sE",
+        "title": "CKA Series | Day-3 | Docker Basics in Kannada 🔥 | Docker Commands part-2 | 2026"
+      },
+      {
+        "id": "fM7BBW9ylik",
+        "title": "CKA Series | Day-4 | Docker Basics in Kannada 🔥 | Dockerfile instructions | 2026"
+      },
+      {
+        "id": "CCwhRYW_et8",
+        "title": "CKA Series | Day-5 | Docker Basics in Kannada 🔥 | Dockerfile deepdive | 2026"
+      },
+      {
+        "id": "8c7T5x4UE0c",
+        "title": "CKA Series | Day-6 | Docker Basics in Kannada 🔥 | Dockerfile Multistage | 2026"
+      },
+      {
+        "id": "O3yBLQRnjgQ",
+        "title": "CKA Series | Day-7 | Kubernetes Architecture in Kannada | Master K8s Components | 2026"
+      },
+      {
+        "id": "FeJ_jI47ipE",
+        "title": "CKA Series | Day-8 | Kubernetes Installation in Kannada | Master K8s Components | 2026"
+      },
+      {
+        "id": "QNcyExchHwU",
+        "title": "CKA Series | Day-9 | Kubernetes imperative way in Kannada | Master K8s | 2026"
+      },
+      {
+        "id": "OtX9XSEORsw",
+        "title": "CKA Series | Day-10 | Declarative Method in Kubernetes Explained in Kannada | Master K8s | 2026"
+      },
+      {
+        "id": "s8nUSIajPpo",
+        "title": "CKA Series | Day-11 | Pod & Pod Lifecycle in  Kubernetes Explained in Kannada | Master K8s | 2026"
+      },
+      {
+        "id": "0gOtEYzPPbk",
+        "title": "CKA Series | Day-12 | Kubernetes Labels, Selectors & ReplicaSet in Kannada | Master K8s | 2026"
+      },
+      {
+        "id": "6tWhDZRKv4w",
+        "title": "CKA Series | Day-13 | Kubernetes Deployment object in Kannada | Master K8s | 2026"
+      },
+      {
+        "id": "TO3w1ow02W4",
+        "title": "CKA Series|Day-14 | Rolling Update vs Recreate Strategy | Kubernetes Deployment Explained in Kannada"
+      },
+      {
+        "id": "-wCJTQLEGt8",
+        "title": "CKA Series| Day-15 | Blue-Green vs Canary Strategy | Kubernetes Deployment Explained in Kannada"
+      },
+      {
+        "id": "jbkmBVlmXNk",
+        "title": "CKA Series| Day-16 | Multi-Container Pods Explained | Init + Sidecar + Adapter Pattern | Kannada"
+      },
+      {
+        "id": "4w0CvUx7qUc",
+        "title": "CKA Series| Day-17 |Node Selector Explained with Real Demo| Kubernetes Advanced Scheduling | Kannada"
+      },
+      {
+        "id": "ud9mva3JR_Q",
+        "title": "CKA Series| Day-18 |Node Affinity in Kubernetes FINALLY Explained! | Kubernetes in Kannada"
+      },
+      {
+        "id": "Lw3Xl7_BwOc",
+        "title": "CKA Series | Day-19| Kubernetes DaemonSet Explained | Kubernetes in Kannada"
+      },
+      {
+        "id": "asGs1PGIhDQ",
+        "title": "CKA Series | Day-20 | CPU & Memory Requests vs Limits | Kubernetes in Kannada"
+      },
+      {
+        "id": "UJ0HDwf6Wog",
+        "title": "CKA Series| Day-22 | Services Explained with LIVE Demo|How Traffic Distribution Works  | in Kannada"
+      },
+      {
+        "id": "1zNX1k6exyc",
+        "title": "CKA Series | Day-23 | Service Types, Endpoints & Selectors Full Guide | Kubernetes in Kannada"
+      },
+      {
+        "id": "-fCaWBU6ENg",
+        "title": "CKA Series | Day-24 | LoadBalancer Service Type Explained  | EKSCTL Demo | Kubernetes in Kannada"
+      },
+      {
+        "id": "f1EieOQaft0",
+        "title": "CKA Series | Day-25 | Ingress Made Easy! Kubernetes Ingress Controller | Kubernetes in Kannada"
+      },
+      {
+        "id": "XACUZYeia58",
+        "title": "CKA Series | Day-26 | Ingress Rules | Kubernetes Ingress Controller | Kubernetes in Kannada"
+      },
+      {
+        "id": "NyFf1gMnmmI",
+        "title": "CKA Series | Day-27 | Service Accounts & Namespaces Explained | Kubernetes in Kannada"
+      },
+      {
+        "id": "SX2tJZEcowE",
+        "title": "CKA Series | Day-28 | HPA Explained | Complete Autoscaling Tutorial | Kubernetes in Kannada"
+      },
+      {
+        "id": "hQAcl8gBVuQ",
+        "title": "CKA Series | Day-29 | VPA Explained | Vertical Pod Autoscaler Tutorial | Kubernetes in Kannada"
+      },
+      {
+        "id": "3IsiK-RJ2fY",
+        "title": "CKA Series | Day-30 | Kubernetes Probes Explained | Startup Liveness Readiness Probes | Kubernetes"
+      },
+      {
+        "id": "EMyo30BXsjY",
+        "title": "CKA Series | Day-31 | Gateway API Explained | Next-Gen Kubernetes Networking | Kubernetes in Kannada"
+      },
+      {
+        "id": "jEFwfxfYtHk",
+        "title": "CKA Series | Day-21 | Priority Class & QoS Explained | Requests vs Limits in Kubernetes | Kannada"
+      },
+      {
+        "id": "dmg6XspCLjo",
+        "title": "CKA Series | Day-32 | ConfigMap's and Secrets| Kubernetes in Kannada"
+      },
+      {
+        "id": "S3r4lubyREI",
+        "title": "CKA Series | Day-33 | TLS and SSL explained| Kubernetes in Kannada"
+      },
+      {
+        "id": "QLybFLKZoqg",
+        "title": "CKA Series | Day-34 | Manage TLS Certificates In a Kubernetes Cluster |Kubernetes in Kannada"
+      },
+      {
+        "id": "bb_CLFnQxt0",
+        "title": "CKA Series | Day-35 | Authentication | Authorization | RBAC In a Kubernetes | Kannada"
+      },
+      {
+        "id": "DIsT4usex8M",
+        "title": "CKA Series | Day-36 | RBAC | ROLE |CLUSTER ROLE| BINDINGS In a Kubernetes | Kannada"
+      },
+      {
+        "id": "Y9nMmkplq8E",
+        "title": "CKA Series | Day-37 | DockerVolumes| Kannada"
+      },
+      {
+        "id": "KKwUSXZapQY",
+        "title": "CKA Series | Day-38 | Kubernetes Volumes Explained | EmptyDir & ConfigMap Hands-On | Kannada"
+      },
+      {
+        "id": "PGddHGnAyS4",
+        "title": "CKA Series | Day-39 | Kubernetes Volumes Explained | PV and PVC | hostapath Hands-On | Kannada"
+      },
+      {
+        "id": "f6n1TRfLb6Y",
+        "title": "CKA Series | Day-40 | Kubeadm Insstallaation Hands-On | Kannada"
+      },
+      {
+        "id": "-SC4tVLiuWc",
+        "title": "CKA Series | Day-41 | Kubernetes Cluster Setup from Scratch to Advanced | Kannada"
+      },
+      {
+        "id": "yiOXmcOXPGE",
+        "title": "CKA Series | Day 42 | Kubernetes Network Policies from Scratch to Advanced | Kannada"
+      },
+      {
+        "id": "ofsV_TflU5A",
+        "title": "CKA 2026 | Day-43 | Final Episode | Static Pods, Taints & Tolerations + Troubleshooting | Kannada"
+      }
+    ]
+  },
+  "terraform": {
+    "playlistId": "PLaZfMOMvbDObYwQK8sEPbH8KpDAAEwXLX",
+    "videos": [
+      {
+        "id": "OiftnZxmMMs",
+        "title": "PART-1 | TERRAFORM | ZERO TO HERO – Complete DevOps Infrastructure Series | PART-1 | Kannada"
+      },
+      {
+        "id": "f834D4d-uIE",
+        "title": "PART-2 |TERRAFORM | ZERO TO HERO – Complete DevOps Infrastructure Series | PART-2 | Kannada"
+      },
+      {
+        "id": "tq4AkBrLFA8",
+        "title": "PART-3|Terraform Advanced Concepts | Terraform Blocks Explained in Depth | Interview Questions"
+      },
+      {
+        "id": "cBdXgqJpw7k",
+        "title": "PART-4 |Terraform Advanced Concepts | Terraform Life Cycle  in Depth | Interview Questions | DevOps"
+      },
+      {
+        "id": "iOTMO3EX6YI",
+        "title": "PART-5 | Terraform State & Backend Deep Dive | Real-Time Scenarios | Interview Questions"
+      },
+      {
+        "id": "O0c02DewzXc",
+        "title": "PART-6 |Terraform Advanced Concepts | Multi Cloud | Multi Region | Meta Arguments ಸಂಪೂರ್ಣ ವಿವರಣೆ"
+      },
+      {
+        "id": "M6CjasjDW7c",
+        "title": "PART-7 |Terraform Project 🔥 Deploy Static Website on AWS S3 | Step-by-Step in Kannada | DevOps"
+      },
+      {
+        "id": "H0mv6nCd7x0",
+        "title": "PART-8 | Terraform Advanced Data Sources Explained | Real-Time Interview Scenarios | DevOps Tutorial"
+      },
+      {
+        "id": "qbSLTtK4M_Y",
+        "title": "PART-9 |Terraform Modules Explained | Public Registry Modules | VPC Creation Step-by-Step"
+      }
+    ]
+  },
+  "helm": {
+    "playlistId": "PLaZfMOMvbDOag1kf1LsvDYiVyO7Rzb6wc",
+    "videos": [
+      {
+        "id": "vXYyFzLZtpg",
+        "title": "Helm Charts Tutorial For Beginners To Expert | Part 1 | Kannada"
+      },
+      {
+        "id": "5YKxp9mlEmU",
+        "title": "Helm Charts Tutorial For Beginners To Expert | Part 2 | Kannada"
+      },
+      {
+        "id": "cOknY1cliwU",
+        "title": "Helm Charts Tutorial For Beginners To Expert | Part 3 | Kannada"
+      },
+      {
+        "id": "AmNrsGbfXzk",
+        "title": "Helm Charts Tutorial For Beginners To Expert | Part 4 | Kannada"
+      },
+      {
+        "id": "RILH3iPjNmA",
+        "title": "Helm Charts Tutorial For Beginners To Expert | Part 5 | Kannada"
+      }
+    ]
+  },
+  "microservices": {
+    "playlistId": "PLaZfMOMvbDObZYvV8lxDjrLnmfMzKmZaH",
+    "videos": [
+      {
+        "id": "b6rEDUcsQsI",
+        "title": "Part-1 | 12 Microservices Deployed on Kubernetes (AWS EKS) | Real DevOps Project"
+      },
+      {
+        "id": "zCtEBmxh0hE",
+        "title": "Part-2 | 12 Microservices Deployed on Kubernetes (AWS EKS) |Docker|Jenkins| Real DevOps Project "
+      },
+      {
+        "id": "oiCDvyxdFHs",
+        "title": "Part-3 | 12 Microservices Deployed on Kubernetes (AWS EKS) |Docker|Jenkins| Real DevOps Project "
+      }
+    ]
+  },
+  "aws-projects": {
+    "playlistId": "PLaZfMOMvbDOb_v26-n2t6suXnuhg6E9Rf",
+    "videos": [
+      {
+        "id": "oGF0HNcmre4",
+        "title": "AWS Cloud Cost Optimization using Lambda & EventBridge | Unused EBS Cleanup | Kannada"
+      }
+    ]
+  },
+  "devops-projects": {
+    "playlistId": "PLaZfMOMvbDOarDh_393x2jVw1XrBORcCa",
+    "videos": [
+      {
+        "id": "KAcUkvvRCe4",
+        "title": "PROJECT-1 | End-to-End CI Pipeline for GenAI Chatbot | Python + Docker + Jenkins Integration"
+      },
+      {
+        "id": "3iT-rRiHM2s",
+        "title": "PROJECT-2|AWS EKS Cluster from Scratch |Terraform + Jenkins CI/CD | Full DevOps Automation Tutorial"
+      },
+      {
+        "id": "HRY7pTPNxB0",
+        "title": "PROJECT-3 | Kannada DevOps Project | Chatbot App Deployment on AWS EKS | Complete Automation"
+      }
+    ]
+  },
+  "python-dsa": {
+    "playlistId": "PLaZfMOMvbDOZZTe_KMpmZ20uJ5Jt67Pxh",
+    "videos": [
+      {
+        "id": "VnYE66dvsdY",
+        "title": "Python + DSA Day 01 | Basics of Python: Print, Variables, Indentation & If Statements"
+      },
+      {
+        "id": "2214IWwP-Iw",
+        "title": "Python + DSA - Day 02 | Learn Python Data Types & Operators"
+      },
+      {
+        "id": "uCmOnjfZTGw",
+        "title": "Python + DSA - Day 03 | Learn Python List and For loops"
+      },
+      {
+        "id": "UWV7vc94ISI",
+        "title": "Python + DSA - Day 04 | Learn Python String reversal and Palindrome"
+      },
+      {
+        "id": "rwq8OOXw4QU",
+        "title": "Python + DSA - Day 05 |  Palindrome"
+      },
+      {
+        "id": "IqESIs9KEcM",
+        "title": "Python + DSA - Day 06 | Functions"
+      },
+      {
+        "id": "oAnn4d0_1BQ",
+        "title": "Python + DSA - Day 07 | Leet-code"
+      },
+      {
+        "id": "t9z0OZoM7Ls",
+        "title": "Python + DSA - Day 08 | Leet-code"
+      },
+      {
+        "id": "gVCN5EeohG8",
+        "title": "Python + DSA - Day 09 | Leet-code and double for loop"
+      },
+      {
+        "id": "m1sd8kTtqyw",
+        "title": "Python + DSA - Day 10 |2D array and double for loop"
+      },
+      {
+        "id": "kHT45ElBigQ",
+        "title": "Python + DSA - Day 11 | Patterns  | DSA in python in Kannada | ITKannadigaru"
+      },
+      {
+        "id": "ZWjupQA43ms",
+        "title": "Python + DSA - Day 12 | Patterns"
+      },
+      {
+        "id": "RRw6ybR1p5w",
+        "title": "Python + DSA - Day 13 | Patterns  | DSA  python in Kannada | ITKannadigaru"
+      },
+      {
+        "id": "jMZ8xunrhL0",
+        "title": "Python + DSA - Day 14 | Patterns  | DSA in python in Kannada | ITKannadigaru"
+      },
+      {
+        "id": "Tyq7yIqV_EI",
+        "title": "Python + DSA - Day 15 | Time-complexity  | DSA in python in Kannada | ITKannadigaru"
+      },
+      {
+        "id": "HNg2-vqeSfo",
+        "title": "Python + DSA - Day 16 | Leet code  | DSA in python in Kannada | ITKannadigaru"
+      },
+      {
+        "id": "EUjjcvATyzc",
+        "title": "Python + DSA - Day 17 | Leet code  | DSA in python in Kannada | ITKannadigaru"
+      },
+      {
+        "id": "06yY1UbuMFM",
+        "title": "Python + DSA - Day 18 | Leet code  | DSA in python in Kannada | ITKannadigaru"
+      },
+      {
+        "id": "-Rclqrsu0Hc",
+        "title": "Python + DSA - Day 19 | Input functions | DSA in python in Kannada | ITKannadigaru"
+      },
+      {
+        "id": "JlGBm0SgBsc",
+        "title": "Python + DSA - Day 20 | Bubble Sort | Sort | DSA in python in Kannada | ITKannadigaru"
+      },
+      {
+        "id": "KunvbOu8jmM",
+        "title": "Python + DSA - Day 21 | DICTIONARY | Data Structure | DSA in python in Kannada | ITKannadigaru"
+      },
+      {
+        "id": "rw8bm_7zdMw",
+        "title": "Python + DSA - Day 22 | DICTIONARY | Leet code | DSA in python in Kannada | ITKannadigaru"
+      },
+      {
+        "id": "cFkrlQ1IWzE",
+        "title": "Python + DSA - Day 23 | DICTIONARY | Leet code | DSA in python in Kannada | ITKannadigaru"
+      },
+      {
+        "id": "iovl08JGOqo",
+        "title": "Python + DSA - Day 24 | DICTIONARY | Leet code | DSA in python in Kannada | ITKannadigaru"
+      },
+      {
+        "id": "HP8gKhX6kVM",
+        "title": "Python + DSA - Day 25 | SET | Leet code | DSA in python in Kannada | ITKannadigaru"
+      },
+      {
+        "id": "H6jv8Y_SlAA",
+        "title": "Python + DSA - Day 26 | Subarray| SubString | Leet code | DSA in python in Kannada | ITKannadigaru"
+      }
+    ]
+  },
+  "interview-preparation": {
+    "playlistId": "PLaZfMOMvbDObzMG2hLFe3Ldb8mj3kdBe1",
+    "videos": [
+      {
+        "id": "YihiCe6n5JQ",
+        "title": "DevOps Interview Questions & Answers | Real Project Explanation | Kubernetes Deep Dive"
+      },
+      {
+        "id": "w7DJ4_TDVdY",
+        "title": "Real DevOps Interview Questions & Answers | K8s, Helm, Terraform, CI/CD"
+      }
+    ]
+  }
+}

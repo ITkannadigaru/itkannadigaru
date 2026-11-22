@@ -51,3 +51,74 @@ npm run build:pages
 ```
 
 The exported static site is generated in `out/`.
+
+## Learning path
+
+The Python for AI pilot lives at `/itkannadigaru/learn/python-for-ai`. Lesson
+titles, YouTube video IDs, original study notes, exercises, and links to related
+notebooks are maintained in `src/lib/python-lessons.ts`. Update this list as
+new videos are published. Notes are short companions and should be checked
+against the corresponding video before publication.
+
+Opening a video updates the course's videos-opened progress in browser local
+storage on one device; it does not verify playback. In every course,
+learners mark lessons complete separately. Marking all published lessons
+complete unlocks a self-reported certificate that can be printed or saved as a
+PDF. There is no account, completion verification, cross-device sync, or email
+delivery.
+
+Other course video lists are a snapshot in `src/data/playlists.json`. Update
+their video IDs and titles when playlists change. Thumbnails load from YouTube.
+`src/lib/course-lessons.ts` maps all 120 additional videos by video ID to beginner
+explanations, illustrative examples, quizzes and practical acceptance checklists.
+Each course includes a prerequisite roadmap. CKA lessons are displayed by their
+published day number, including Day 21 in its correct position.
+
+### Notebook notes and practice
+
+The Python pilot also includes twelve source notebooks from
+`ManojKRISHNAPPA/ITK-COMPLETE-GENAI-SERIES`, reproduced with the owner's
+permission. `src/data/python-notebooks.json` pins the source commit and import
+date. Shared modules are presented in full, not as transcripts of individual
+videos. Days with project links rather than a matching notebook retain their
+original companion notes.
+
+Run `npm run import:python-notes` with authenticated `gh` to refresh the snapshot,
+then review the generated content before committing it. The importer preserves
+markdown, code and saved plain-text outputs; it excludes raw cells, HTML/rich
+outputs, tracebacks and execution metadata. The site renders Markdown without
+raw HTML and never executes notebook code. Run `npm run test:notes` to check
+the importer.
+
+`src/lib/python-assessments.ts` contains an original knowledge check and a
+practical assignment checklist for each of the 23 lessons. Answers receive
+feedback; assignment checks are self-reported. These results persist per day
+in browser storage, do not upload submissions or grade code, and do not gate
+the existing self-reported certificate.
+
+### All-playlist learning workspaces
+
+The remaining nine playlists have the same watch/read/practise/complete flow.
+`src/data/course-notes.json` contains 74 related Markdown, notebook and Terraform
+documents from the owner's AI, CKA, Terraform and AWS repositories. Each document
+records its pinned commit and source URL. Only documents referenced by a course
+are passed to its reader. Source numbering can differ from video numbering;
+the mapping is explicit. Shared modules are not presented as exact video notes.
+
+Refresh with `npm run import:course-notes` using authenticated `gh`, then review
+topic alignment, sensitive values, compatibility and image links before
+publication. Large notebooks are retrieved through GitHub's blob endpoint.
+Markdown tables are rendered; relative image links resolve against the pinned
+source. Raw HTML and rich notebook outputs remain disabled.
+
+Lessons without a matching source retain explicitly labeled original companion
+content. In particular, vaguely titled LeetCode and microservices parts do not
+claim to reproduce the exact video exercise. Cloud tasks start with mock data,
+read-only reporting or reviewed plans; imported examples are not instructions
+to execute against production.
+
+Assessment storage keys include both playlist and video identity. Answers and
+assignment checks remain separate from videos-opened progress and manual course
+completion. The Python pilot's original storage keys are preserved. Certificates
+are downloadable through print/save-as-PDF; no email, verified grading or
+professional credential is provided.
