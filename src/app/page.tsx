@@ -23,7 +23,7 @@ export default function Home() {
         <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-5 sm:px-8" aria-label="Main navigation">
           <a href="#home" className="text-lg font-extrabold"><span className="text-yellow">&lt;/&gt;</span> ITKannadigaru</a>
           <div className="hidden items-center gap-8 text-sm text-grey md:flex"><a href="#roadmap" className="hover:text-white">Roadmap</a><a href="#courses" className="hover:text-white">Start learning</a><a href="#about" className="hover:text-white">Our story</a></div>
-          <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" className="rounded-full border border-white/20 px-4 py-2 text-sm font-semibold hover:border-yellow hover:text-yellow">YouTube ↗</a>
+          <div className="flex items-center gap-3"><Link href="/login" className="text-sm font-semibold text-yellow">Sign in</Link><a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" className="rounded-full border border-white/20 px-4 py-2 text-sm font-semibold hover:border-yellow hover:text-yellow">YouTube ↗</a></div>
         </nav>
       </header>
 
