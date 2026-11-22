@@ -6,6 +6,17 @@ export type StudyGuide = {
   remember: string;
 };
 
+export type StudyLesson = {
+  label: string;
+  definition: string;
+  example: string;
+  guide: StudyGuide;
+  question: string;
+  answer: string;
+  assignment: string;
+  criteria: string[];
+};
+
 export const pythonStudyGuides: Record<string, StudyGuide> = {
   fa_t1SrIc0A: {
     title: "Variables: giving useful names to values",

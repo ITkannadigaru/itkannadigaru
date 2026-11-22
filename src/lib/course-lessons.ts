@@ -1,5 +1,7 @@
 import type { catalog } from "@/lib/catalog";
 import type { Assessment } from "@/lib/python-assessments";
+import type { StudyGuide } from "@/lib/python-study-guides";
+import { getCourseStudyGuide } from "@/lib/course-study-guides";
 
 export type CourseLesson = {
   id: string;
@@ -9,9 +11,10 @@ export type CourseLesson = {
   example: string;
   sourceIds: string[];
   assessment: Assessment;
+  studyGuide: StudyGuide;
 };
 
-type Companion = Omit<CourseLesson, "id" | "title" | "label">;
+type Companion = Omit<CourseLesson, "id" | "title" | "label" | "studyGuide">;
 
 function lesson(explanation: string, example: string, question: string, answers: [string, string, string], assignment: string, criteria: string[], sourceIds: string[] = []): Companion {
   // Rotate the correct option so the quizzes do not teach a fixed answer position.
@@ -239,6 +242,6 @@ export function getCourseLessons(course: (typeof catalog)[number]): CourseLesson
     if (!companion) throw new Error(`Missing companion for ${course.slug}/${video.id}`);
     const day = video.title.match(/\bday[\s-]*(\d+)/i)?.[1];
     const label = day ? `Day ${Number(day)}` : `Lesson ${index + 1}`;
-    return { ...companion, id: video.id, title: video.title, label };
+    return { ...companion, id: video.id, title: video.title, label, studyGuide: getCourseStudyGuide(video.id) };
   });
 }

@@ -26,6 +26,9 @@ function load(relativePath) {
 const { catalog } = load("src/lib/catalog.ts");
 const { getCourseLessons } = load("src/lib/course-lessons.ts");
 const { getCourseMaterials } = load("src/lib/course-materials.ts");
+const { lessons: pythonLessons } = load("src/lib/python-lessons.ts");
+const { getPythonStudyGuide } = load("src/lib/python-study-guides.ts");
+const { getCourseStudyGuide } = load("src/lib/course-study-guides.ts");
 
 test("every published video has distinct practice and valid pinned source references", () => {
   let total = 0;
@@ -70,4 +73,25 @@ test("unmapped videos and source IDs fail explicitly rather than showing unrelat
   const practice = getCourseLessons(dsa).find((lesson) => lesson.id === "oAnn4d0_1BQ");
   assert.match(practice.explanation, /original companion practice/i);
   assert.deepEqual(practice.sourceIds, []);
+});
+
+test("all courses provide contextual walkthroughs rather than generic source wrappers", () => {
+  const all = [
+    ...catalog.flatMap((course) => getCourseLessons(course).map((lesson) => ({ id: lesson.id, guide: lesson.studyGuide }))),
+    ...pythonLessons.map((lesson) => ({ id: lesson.video, guide: getPythonStudyGuide(lesson.video) })),
+  ];
+  assert.equal(all.length, 143);
+  for (const { id, guide } of all) {
+    assert.ok(guide.title && guide.connection && guide.mistake && guide.remember, id);
+    assert.ok(guide.walkthrough.length >= 3, `${id}: missing explanatory steps`);
+    assert.equal(new Set(guide.walkthrough).size, guide.walkthrough.length);
+  }
+  const variables = getPythonStudyGuide(pythonLessons[0].video);
+  const calculations = getPythonStudyGuide(pythonLessons[1].video);
+  assert.notDeepEqual(variables.walkthrough, calculations.walkthrough);
+  assert.ok(calculations.walkthrough.some((step) => step.includes("60")));
+  assert.match(getCourseStudyGuide("HU2hK-IbIzM").remember, /ML learns patterns/);
+  assert.match(getCourseStudyGuide("oGF0HNcmre4").mistake, /Deletion/);
+  assert.throws(() => getCourseStudyGuide("not-a-video"), /Missing course study guide/);
+  assert.throws(() => getPythonStudyGuide("not-a-video"), /Missing Python study guide/);
 });

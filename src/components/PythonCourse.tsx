@@ -137,7 +137,7 @@ export default function PythonCourse() {
                 <div><h3 className="font-bold">The idea, simply explained</h3><p className="mt-3 leading-7 text-grey">{lesson.explanation}</p></div>
                 <div><div className="flex items-center justify-between"><h3 className="font-bold">Try an example</h3><span className="font-mono text-xs text-yellow">PYTHON</span></div><pre className="mt-3 overflow-x-auto rounded-2xl border border-white/10 bg-[#070b14] p-5 text-sm leading-7 text-[#e2e8f0]"><code>{lesson.code}</code></pre></div>
                 <div className="rounded-2xl border border-yellow/20 bg-yellow/5 p-5"><h3 className="font-bold text-yellow">Your turn ✨</h3><p className="mt-2 text-sm leading-6 text-grey">{lesson.practice}</p></div>
-                <NotebookNotes key={`notebook-${lesson.day}`} source={lesson.source} />
+                <NotebookNotes key={`notebook-${lesson.day}`} lesson={lesson} />
                 <div id="assessment" className="scroll-mt-6">
                   <LessonAssessment key={lesson.day} day={lesson.day} />
                 </div>

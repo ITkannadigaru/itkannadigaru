@@ -2,13 +2,17 @@
 
 import SourceNotes from "@/components/SourceNotes";
 import notebooks from "@/data/python-notebooks.json";
+import type { Lesson } from "@/lib/python-lessons";
+import { getPythonStudyGuide } from "@/lib/python-study-guides";
+import { assessments } from "@/lib/python-assessments";
 
-export default function NotebookNotes({ source }: { source?: string }) {
-  const notebook = Object.entries(notebooks.notebooks).find(([file]) => source?.endsWith(`/${file}`));
-  if (!notebook) {
-    return <p className="rounded-2xl border border-white/10 p-4 text-sm leading-6 text-grey">No matching .ipynb notebook is attached to this day yet. Use the original lesson notes above{source ? " and the linked GitHub project" : ""}.</p>;
-  }
-  const [file, data] = notebook;
-
-  return <SourceNotes document={{ ...data, id: file, title: file, commit: notebooks.commit }} importedAt={notebooks.importedAt} />;
+export default function NotebookNotes({ lesson }: { lesson: Lesson }) {
+  const notebook = Object.entries(notebooks.notebooks).find(([file]) => lesson.source?.endsWith(`/${file}`));
+  const documents = notebook ? [{ ...notebook[1], id: notebook[0], title: notebook[0], commit: notebooks.commit }] : [];
+  const assessment = assessments[lesson.day];
+  return <SourceNotes documents={documents} importedAt={notebooks.importedAt} study={{
+    label: `Day ${lesson.day}`, definition: lesson.explanation, example: lesson.code,
+    guide: getPythonStudyGuide(lesson.video), question: assessment.question,
+    answer: assessment.options[assessment.answer], assignment: assessment.assignment, criteria: assessment.criteria,
+  }} />;
 }
