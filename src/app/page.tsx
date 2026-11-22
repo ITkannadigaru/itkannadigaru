@@ -7,6 +7,7 @@ import { catalog } from "@/lib/catalog";
 import KarnatakaMap from "@/components/KarnatakaMap";
 import ContinueLearning from "@/components/ContinueLearning";
 import { getCourseLessons } from "@/lib/course-lessons";
+import AccountLink from "@/components/AccountLink";
 
 const resumeCourses = [
   { slug: "python-for-ai", title: "Python for AI", lessons: lessons.map((lesson) => ({ id: lesson.video, title: lesson.title, label: `Day ${lesson.day}` })) },
@@ -20,10 +21,10 @@ export default function Home() {
   return (
     <main>
       <header className="border-b border-white/10">
-        <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-5 sm:px-8" aria-label="Main navigation">
-          <a href="#home" className="text-lg font-extrabold"><span className="text-yellow">&lt;/&gt;</span> ITKannadigaru</a>
+        <nav className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-4 py-5 sm:gap-4 sm:px-8" aria-label="Main navigation">
+          <a href="#home" className="text-base font-extrabold sm:text-lg"><span className="text-yellow">&lt;/&gt;</span> ITKannadigaru</a>
           <div className="hidden items-center gap-8 text-sm text-grey md:flex"><a href="#roadmap" className="hover:text-white">Roadmap</a><a href="#courses" className="hover:text-white">Start learning</a><a href="#about" className="hover:text-white">Our story</a></div>
-          <div className="flex items-center gap-3"><Link href="/login" className="text-sm font-semibold text-yellow">Sign in</Link><a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" className="rounded-full border border-white/20 px-4 py-2 text-sm font-semibold hover:border-yellow hover:text-yellow">YouTube ↗</a></div>
+          <div className="flex min-w-0 items-center gap-3"><AccountLink /><a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" className="hidden rounded-full border border-white/20 px-4 py-2 text-sm font-semibold hover:border-yellow hover:text-yellow sm:inline-flex">YouTube ↗</a></div>
         </nav>
       </header>
 

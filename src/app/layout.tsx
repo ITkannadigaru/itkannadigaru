@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Sans_Kannada } from "next/font/google";
+import VisitorGate from "@/components/VisitorGate";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -34,7 +35,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${notoKannada.variable} antialiased bg-background text-foreground`}
       >
-        {children}
+        <VisitorGate>{children}</VisitorGate>
       </body>
     </html>
   );

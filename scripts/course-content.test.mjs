@@ -34,6 +34,23 @@ const { learningPaths } = load("src/lib/learning-paths.ts");
 const { careerRoadmaps } = load("src/lib/career-roadmaps.ts");
 const { getCourseProject } = load("src/lib/course-projects.ts");
 const { lessonVisuals } = load("src/lib/lesson-visuals.ts");
+const { safeReturnPath } = load("src/lib/visitor-session.ts");
+const { profileName } = load("src/lib/profile.ts");
+
+test("profile names prefer learner edits and fall back to Google names", () => {
+  assert.equal(profileName({ display_name: "  Anu  ", full_name: "Google Name", name: "Other" }), "Anu");
+  assert.equal(profileName({ display_name: "  ", full_name: " Google Name " }), "Google Name");
+  assert.equal(profileName({ full_name: null, name: "Google Name" }), "Google Name");
+  assert.equal(profileName({ display_name: 42, full_name: "" }), "Learner");
+  assert.equal(profileName(null), "Learner");
+});
+
+test("login return paths stay inside the site and avoid redirect loops", () => {
+  assert.equal(safeReturnPath("/itkannadigaru/learn/python-for-ai?x=1#notes"), "/itkannadigaru/learn/python-for-ai?x=1#notes");
+  for (const value of [null, "//evil.example", "/\\evil.example", "/other", "/itkannadigaru/login", "/itkannadigaru/login/", "/itkannadigaru/../other"]) {
+    assert.equal(safeReturnPath(value), "/itkannadigaru");
+  }
+});
 
 test("career roadmaps explain each topic and link to available courses", () => {
   const slugs = new Set(["python-for-ai", ...catalog.map((course) => course.slug)]);

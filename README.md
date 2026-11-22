@@ -56,6 +56,12 @@ The exported static site is generated in `out/`.
 ## Student sign-in
 
 Google sign-in uses Supabase Auth and is optional; no subscription is required.
+New browser-tab sessions see the sign-in page first and can continue as a guest.
+Guest choice lasts for that tab session; deep links return to the requested
+page after the choice. This client-side prompt is not access control.
+Signed-in learners see their Google name in the header and can edit their
+profile name on the account page. The chosen name is stored in their Supabase
+Auth user metadata; it is not linked to the device-local learning progress.
 It currently signs students in only: progress, quiz answers and certificates
 remain in browser storage and are not associated with the account or synced.
 Do not use a shared device for sensitive practice data.
@@ -75,8 +81,11 @@ and any local development login URL to Supabase's redirect allow list. If the
 Google app is in testing mode, add each test user in Google Cloud. See the
 [Supabase Google sign-in guide](https://supabase.com/docs/guides/auth/social-login/auth-google).
 
-Lesson Like, Comment and Subscribe links open YouTube; these are optional and
-the website does not submit actions on a learner's behalf.
+Lesson Like, Dislike, Comment, Share and Subscribe links open YouTube; the
+learner chooses and performs those actions there. They are optional and the
+website does not submit actions on a learner's behalf.
+The first embedded player opened per browser tab shows a dismissible reminder
+outside the video; session storage keeps it from appearing again in that tab.
 
 ## Learning path
 
