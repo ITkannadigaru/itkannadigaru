@@ -52,6 +52,31 @@ npm run build:pages
 
 The exported static site is generated in `out/`.
 
+## Student sign-in
+
+Google sign-in uses Supabase Auth and is optional; no subscription is required.
+It currently signs students in only: progress, quiz answers and certificates
+remain in browser storage and are not associated with the account or synced.
+Do not use a shared device for sensitive practice data.
+
+Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SUPABASE_URL` and
+`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` to the project's URL and publishable
+key (the legacy anon key is also supported). These values are public in the
+client build. Never use a secret or service-role key. For GitHub Pages builds,
+set the same names under **Settings > Secrets and variables > Actions >
+Variables**; Next.js embeds them at build time.
+
+Enable the Google provider in Supabase Auth. In Google Cloud, configure a Web
+application OAuth client with the site origin and the Supabase provider's
+callback URL. Store its client secret in Supabase, not in this repository.
+Add the deployed `https://itkannadigaru.github.io/itkannadigaru/login`
+and any local development login URL to Supabase's redirect allow list. If the
+Google app is in testing mode, add each test user in Google Cloud. See the
+[Supabase Google sign-in guide](https://supabase.com/docs/guides/auth/social-login/auth-google).
+
+Lesson Like, Comment and Subscribe links open YouTube; these are optional and
+the website does not submit actions on a learner's behalf.
+
 ## Learning path
 
 The Python for AI pilot lives at `/itkannadigaru/learn/python-for-ai`. Lesson
@@ -64,8 +89,7 @@ Opening a video updates the course's videos-opened progress in browser local
 storage on one device; it does not verify playback. In every course,
 learners mark lessons complete separately. Marking all published lessons
 complete unlocks a self-reported certificate that can be printed or saved as a
-PDF. There is no account, completion verification, cross-device sync, or email
-delivery.
+PDF. There is no completion verification, cross-device sync, or email delivery.
 
 Other course video lists are a snapshot in `src/data/playlists.json`. Update
 their video IDs and titles when playlists change. Thumbnails load from YouTube.
@@ -169,6 +193,12 @@ The reader's recall disclosure is a revision aid only: it does not submit an
 assessment, mark a task complete or change certificate eligibility.
 
 ### Learning paths, visual examples and final projects
+
+The homepage also offers expandable AI Engineer and DevOps Engineer career
+roadmaps. `src/lib/career-roadmaps.ts` defines the ordered phases, topic cards
+and their explanations, plus links to relevant available courses. The roadmaps
+are guidance, not a guarantee of employment or a claim that every topic has a
+dedicated course. Selecting a roadmap does not record progress.
 
 The homepage roadmap offers AI Engineering, DevOps & Kubernetes, Cloud &
 Infrastructure, and Python & Interview Readiness paths from

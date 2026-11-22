@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Bot, Compass } from "lucide-react";
 import { learningPaths } from "@/lib/learning-paths";
+import CareerRoadmaps from "@/components/CareerRoadmaps";
 
 export default function AIRoadmap() {
   const [pathIndex, setPathIndex] = useState(0);
@@ -15,7 +16,9 @@ export default function AIRoadmap() {
   return (
     <section id="roadmap" className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
       <p className="text-xs font-bold tracking-[0.2em] text-yellow">YOUR NORTH STAR</p>
-      <div className="mt-3 flex flex-wrap items-end justify-between gap-4"><div><h2 className="text-3xl font-extrabold sm:text-4xl">Choose your learning path</h2><p className="mt-3 max-w-2xl leading-7 text-grey">Choose your goal, check the prerequisites and follow linked courses toward a practical project.</p></div><span className="rounded-full border border-white/10 px-4 py-2 text-xs text-grey">INTERACTIVE LEARNING GUIDE</span></div>
+      <div className="mt-3 flex flex-wrap items-end justify-between gap-4"><div><h2 className="text-3xl font-extrabold sm:text-4xl">Your goal. Your roadmap.</h2><p className="mt-3 max-w-2xl leading-7 text-grey">Choose the engineer you want to become. Explore each step and understand why it matters.</p></div><span className="rounded-full border border-white/10 px-4 py-2 text-xs text-grey">INTERACTIVE LEARNING GUIDE</span></div>
+      <div className="mt-8"><CareerRoadmaps /></div>
+      <div className="mt-16 border-t border-white/10 pt-10"><h3 className="text-2xl font-extrabold">Find your next course</h3><p className="mt-3 max-w-2xl leading-7 text-grey">Explore linked courses and practical projects for your chosen learning path.</p></div>
       <div aria-label="Learning path choices" className="mt-6 flex flex-wrap gap-3">{learningPaths.map((item, index) => <button key={item.id} type="button" aria-pressed={pathIndex === index} onClick={() => { setPathIndex(index); setSelected(0); }} className={`rounded-full border px-5 py-3 text-sm font-bold ${pathIndex === index ? "border-yellow bg-yellow text-background" : "border-white/20 hover:border-yellow"}`}>{item.title}</button>)}</div>
       <div className="mt-10 rounded-3xl border border-white/10 bg-card/60 p-5 sm:p-8">
         <h3 className="text-xl font-bold">{path.title}</h3>

@@ -31,8 +31,25 @@ const { getPythonStudyGuide } = load("src/lib/python-study-guides.ts");
 const { getCourseStudyGuide } = load("src/lib/course-study-guides.ts");
 const { readLessonResume, resumeKey } = load("src/lib/course-resume.ts");
 const { learningPaths } = load("src/lib/learning-paths.ts");
+const { careerRoadmaps } = load("src/lib/career-roadmaps.ts");
 const { getCourseProject } = load("src/lib/course-projects.ts");
 const { lessonVisuals } = load("src/lib/lesson-visuals.ts");
+
+test("career roadmaps explain each topic and link to available courses", () => {
+  const slugs = new Set(["python-for-ai", ...catalog.map((course) => course.slug)]);
+  assert.deepEqual(careerRoadmaps.map((roadmap) => roadmap.id), ["ai", "devops"]);
+  for (const roadmap of careerRoadmaps) {
+    assert.ok(roadmap.phases.length >= 5);
+    const topics = roadmap.phases.flatMap((phase) => {
+      assert.ok(phase.title && phase.outcome);
+      if (phase.course) assert.ok(slugs.has(phase.course.slug));
+      return phase.topics;
+    });
+    assert.ok(topics.length >= 25);
+    assert.equal(new Set(topics.map((topic) => topic.name)).size, topics.length);
+    for (const topic of topics) assert.ok(topic.name && topic.why, `${roadmap.id}: missing explanation`);
+  }
+});
 
 test("learning paths cover available courses and link only to real project briefs", () => {
   const slugs = new Set(["python-for-ai", ...catalog.map((course) => course.slug)]);

@@ -107,7 +107,7 @@ export default function PythonCourse() {
         <header className="border-b border-white/10">
           <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-5 sm:px-8" aria-label="Course navigation">
             <Link href="/" className="text-lg font-extrabold"><span className="text-yellow">&lt;/&gt;</span> ITKannadigaru</Link>
-            <Link href="/#courses" className="inline-flex items-center gap-2 text-sm text-grey hover:text-white"><ArrowLeft size={16} /> All learning</Link>
+            <div className="flex items-center gap-4"><Link href="/login" className="text-sm font-semibold text-yellow">Sign in</Link><Link href="/#courses" className="inline-flex items-center gap-2 text-sm text-grey hover:text-white"><ArrowLeft size={16} /> All learning</Link></div>
           </nav>
         </header>
         <section className="relative overflow-hidden border-b border-white/5">
