@@ -99,6 +99,9 @@ the existing self-reported certificate.
 ### All-playlist learning workspaces
 
 The remaining nine playlists have the same watch/read/practise/complete flow.
+On desktop, the sticky notes-and-practice panel scrolls independently of the
+curriculum and supports keyboard scrolling. Selecting Read notes starts at the
+top; Quiz & assignment jumps to the assessment. Mobile retains page scrolling.
 `src/data/course-notes.json` contains 74 related Markdown, notebook and Terraform
 documents from the owner's AI, CKA, Terraform and AWS repositories. Each document
 records its pinned commit and source URL. Only documents referenced by a course

@@ -46,6 +46,21 @@ body {
   font-family: var(--font-noto-kannada), sans-serif;
 }
 
+@media screen and (min-width: 64rem) {
+  .course-notes-panel {
+    max-height: calc(100vh - 3rem);
+    max-height: calc(100dvh - 3rem);
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    scrollbar-gutter: stable;
+  }
+
+  .course-notes-panel .study-reader {
+    max-height: none;
+    overflow-y: visible;
+  }
+}
+
 @keyframes glow-pulse {
   0%, 100% {
     text-shadow:
