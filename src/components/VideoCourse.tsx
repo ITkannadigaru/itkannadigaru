@@ -15,6 +15,7 @@ import LessonSearch from "@/components/LessonSearch";
 import LessonNavigation from "@/components/LessonNavigation";
 import LessonVideo from "@/components/LessonVideo";
 import CourseProject from "@/components/CourseProject";
+import AccountLink from "@/components/AccountLink";
 
 type Course = (typeof catalog)[number];
 type Props = { course: Course; lessons: CourseLesson[]; documents: SourceDocument[]; importedAt: string; roadmap: (typeof roadmaps)[string] };
@@ -94,9 +95,9 @@ export default function VideoCourse({ course, lessons, documents, importedAt, ro
     <>
     <main className="course-page min-h-screen">
       <header className="border-b border-white/10">
-        <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-5 sm:px-8" aria-label="Course navigation">
+        <nav className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 py-5 sm:px-8" aria-label="Course navigation">
           <Link href="/" className="text-lg font-extrabold"><span className="text-yellow">&lt;/&gt;</span> ITKannadigaru</Link>
-          <div className="flex items-center gap-4"><Link href="/login" className="text-sm font-semibold text-yellow">Sign in</Link><Link href="/#courses" className="inline-flex items-center gap-2 text-sm text-grey hover:text-white"><ArrowLeft size={16} /> All learning</Link></div>
+          <div className="flex items-center gap-4"><AccountLink /><Link href="/#courses" className="inline-flex items-center gap-2 text-sm text-grey hover:text-white"><ArrowLeft size={16} /> All learning</Link></div>
         </nav>
       </header>
       <section className="border-b border-white/5 bg-gradient-to-br from-blue-950/30 to-background">
