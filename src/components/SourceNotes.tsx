@@ -4,6 +4,8 @@ import { useId, useState } from "react";
 import Markdown, { defaultUrlTransform } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import type { StudyLesson } from "@/lib/python-study-guides";
+import { lessonVisuals } from "@/lib/lesson-visuals";
+import { StudyVisual, VisualWalkthrough } from "@/components/StudyVisual";
 
 export type SourceDocument = {
   id: string;
@@ -16,6 +18,7 @@ export type SourceDocument = {
 export default function SourceNotes({ documents, importedAt, study }: { documents: SourceDocument[]; importedAt: string; study: StudyLesson }) {
   const [expanded, setExpanded] = useState(false);
   const readerId = `study-${useId().replace(/:/g, "")}`;
+  const visual = lessonVisuals[study.videoId];
   const sections = [["concept", "Concept"], ["example", "Worked example"], ["revision", "Revision"], ["reference", "Original reference"]];
   return (
     <div className="rounded-2xl border border-yellow/20 bg-background/60 p-5">
@@ -33,13 +36,14 @@ export default function SourceNotes({ documents, importedAt, study }: { document
           <p className="mt-4 text-sm leading-7 text-white/90">{study.definition}</p>
           <h5 className="mt-5 font-bold">Build the mental model</h5>
           <p className="mt-3 text-sm leading-7 text-grey">{study.guide.connection}</p>
+          {visual && <StudyVisual visual={visual} />}
         </section>
         <section id={`${readerId}-example`} className="scroll-mt-4">
           <p className="text-xs font-bold tracking-wider text-yellow">02 / WORKED EXAMPLE</p>
           <h4 className="mt-3 text-lg font-bold">Follow the example step by step</h4>
           <p className="mt-2 text-xs leading-6 text-grey">Predict the outcome first. Examples may be code, pseudocode or a process diagram; review prerequisites before running any commands locally.</p>
           <pre className="mt-4 overflow-x-auto rounded-xl border border-white/10 bg-[#060914] p-4 text-xs leading-6 text-white/90"><code>{study.example}</code></pre>
-          <ol className="mt-5 space-y-4">{study.guide.walkthrough.map((step, index) => <li key={step} className="flex gap-3"><span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-yellow/10 text-xs font-bold text-yellow">{index + 1}</span><p className="text-sm leading-7 text-grey">{step}</p></li>)}</ol>
+          <VisualWalkthrough steps={study.guide.walkthrough} />
         </section>
         <section className="rounded-xl border border-orange-300/20 bg-orange-300/5 p-4">
           <h4 className="font-bold text-orange-200">A common mistake to avoid</h4>

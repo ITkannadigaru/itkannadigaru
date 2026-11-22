@@ -102,6 +102,21 @@ The remaining nine playlists have the same watch/read/practise/complete flow.
 On desktop, the sticky notes-and-practice panel scrolls independently of the
 curriculum and supports keyboard scrolling. Selecting Read notes starts at the
 top; Quiz & assignment jumps to the assessment. Mobile retains page scrolling.
+All ten courses support lesson search and Previous/Next navigation in published
+order, even while the curriculum is filtered. Last selected lessons are saved by
+video ID in `itkannadigaru-resume-{course-slug}-v1` and restored on course visits.
+The homepage lists saved courses under Continue learning, most recent first.
+Resume state is device-local, separate from opened videos and manual completion;
+storage failures are shown rather than silently discarded.
+
+Watch video opens the selected lesson's official YouTube privacy-enhanced player
+inside the notes panel. Playback is never automatic: press Play in the loaded
+player. Thumbnails and Open on YouTube remain external fallbacks. Loading a player
+counts as opening a video, not verified playback, completion or a guaranteed
+YouTube view. Embedding must be enabled by the uploader and allowed by the browser;
+the iframe sends the origin Referer required by YouTube. Player availability,
+restrictions and counted views remain controlled by YouTube.
+
 `src/data/course-notes.json` contains 74 related Markdown, notebook and Terraform
 documents from the owner's AI, CKA, Terraform and AWS repositories. Each document
 records its pinned commit and source URL. Only documents referenced by a course
@@ -152,3 +167,28 @@ examples and walkthrough together whenever lesson content changes.
 
 The reader's recall disclosure is a revision aid only: it does not submit an
 assessment, mark a task complete or change certificate eligibility.
+
+### Learning paths, visual examples and final projects
+
+The homepage roadmap offers AI Engineering, DevOps & Kubernetes, Cloud &
+Infrastructure, and Python & Interview Readiness paths from
+`src/lib/learning-paths.ts`. Every milestone links to an existing course or its
+final project. Prerequisites and unavailable foundation coverage are explicit;
+the animated milestone bar is exploration, not earned progress.
+
+Every one of the 143 lesson guides has an interactive visual walkthrough using
+its authored explanatory steps. `src/lib/lesson-visuals.ts` also supplies 37
+original flow/comparison examples with expected observations and symptom/fix
+cards, including all 23 Python foundation lessons and examples across every
+other course. Expectations are teaching targets, never claimed to be code
+executed in the page. Original imported documents remain unchanged.
+
+Each course has a distinct final project brief from
+`src/lib/course-projects.ts`: prerequisites, four build stages, fictional/local
+fixtures, expected demonstrations, acceptance cases, portfolio deliverables,
+troubleshooting and lab safety. Projects are available through
+`#course-project` without requiring certificate completion. They are
+self-reviewed assignments, not implemented student apps, uploads or automated
+grading, and do not change certificate eligibility. AWS cleanup stays read-only
+and mock-data based; Terraform starts with a local file; Kubernetes/Helm labs
+use disposable local environments; model calls can be mocked.

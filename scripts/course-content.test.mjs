@@ -29,6 +29,59 @@ const { getCourseMaterials } = load("src/lib/course-materials.ts");
 const { lessons: pythonLessons } = load("src/lib/python-lessons.ts");
 const { getPythonStudyGuide } = load("src/lib/python-study-guides.ts");
 const { getCourseStudyGuide } = load("src/lib/course-study-guides.ts");
+const { readLessonResume, resumeKey } = load("src/lib/course-resume.ts");
+const { learningPaths } = load("src/lib/learning-paths.ts");
+const { getCourseProject } = load("src/lib/course-projects.ts");
+const { lessonVisuals } = load("src/lib/lesson-visuals.ts");
+
+test("learning paths cover available courses and link only to real project briefs", () => {
+  const slugs = new Set(["python-for-ai", ...catalog.map((course) => course.slug)]);
+  const linked = new Set();
+  for (const path of learningPaths) {
+    for (const stage of path.stages) {
+      assert.ok(slugs.has(stage.slug), `${path.id}: missing route ${stage.slug}`);
+      linked.add(stage.slug);
+      if (stage.project) assert.ok(getCourseProject(stage.slug).checks.length >= 3);
+    }
+  }
+  assert.deepEqual(linked, slugs);
+  const projects = [...slugs].map(getCourseProject);
+  assert.equal(new Set(projects.map((project) => project.title)).size, slugs.size);
+  for (const project of projects) {
+    assert.ok(project.fixture && project.expected && project.safety);
+    assert.ok(project.steps.length >= 4 && project.deliverables.length >= 3);
+    assert.ok(project.troubleshooting.length >= 2);
+  }
+  assert.throws(() => getCourseProject("unpublished-course"), /Missing course project/);
+  assert.throws(() => getCourseProject("__proto__"), /Missing course project/);
+});
+
+test("visual examples map to published lessons and include observations and failure diagnosis", () => {
+  const videoIds = new Set([...pythonLessons.map((lesson) => lesson.video), ...catalog.flatMap((course) => course.videos.map((video) => video.id))]);
+  for (const [id, visual] of Object.entries(lessonVisuals)) {
+    assert.ok(videoIds.has(id), `Unmapped visual example: ${id}`);
+    assert.ok(visual.nodes.length >= 3);
+    assert.equal(new Set(visual.nodes).size, visual.nodes.length);
+    assert.ok(visual.expected && visual.fault && visual.fix);
+  }
+  for (const lesson of pythonLessons) assert.ok(lessonVisuals[lesson.video], `Missing Python visual: ${lesson.day}`);
+  for (const course of catalog) assert.ok(course.videos.some((video) => lessonVisuals[video.id]), `No worked visual for ${course.slug}`);
+});
+
+test("saved lessons use video identity, validate data and isolate each course", () => {
+  const saved = new Map();
+  const storage = { getItem: (key) => saved.get(key) ?? null };
+  assert.equal(readLessonResume(storage, "ai-engineering", ["first", "second"]), null);
+  saved.set(resumeKey("ai-engineering"), JSON.stringify({ videoId: "second", updatedAt: 123 }));
+  assert.deepEqual(readLessonResume(storage, "ai-engineering", ["second", "first"]), { videoId: "second", updatedAt: 123 });
+  assert.equal(readLessonResume(storage, "python-for-ai", ["second"]), null);
+  assert.throws(() => readLessonResume(storage, "ai-engineering", ["first"]), /Invalid saved lesson/);
+  for (const value of ["invalid JSON", "null", '{"videoId":"second","updatedAt":"123"}', '{"videoId":"second","updatedAt":0}']) {
+    saved.set(resumeKey("ai-engineering"), value);
+    assert.throws(() => readLessonResume(storage, "ai-engineering", ["second"]));
+  }
+  assert.throws(() => readLessonResume({ getItem: () => { throw new Error("Storage blocked"); } }, "ai-engineering", ["first"]), /Storage blocked/);
+});
 
 test("every published video has distinct practice and valid pinned source references", () => {
   let total = 0;
