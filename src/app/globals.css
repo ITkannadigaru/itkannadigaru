@@ -293,6 +293,7 @@ body {
   }
 
   .certificate-border {
+    position: relative;
     border: 3px solid #d5a900;
     outline: 1px solid #d5a900;
     outline-offset: -12px;
@@ -334,6 +335,22 @@ body {
   .certificate-footer {
     margin: 26px 0 8px;
     color: #8a6900;
+  }
+
+  .certificate-seal {
+    position: absolute;
+    right: 24px;
+    bottom: 20px;
+    width: 96px;
+    height: 120px;
+  }
+
+  @media (max-width: 600px) {
+    .certificate-seal {
+      position: static;
+      display: block;
+      margin: 16px auto 0;
+    }
   }
 
   .certificate-print small {

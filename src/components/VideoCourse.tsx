@@ -121,7 +121,11 @@ export default function VideoCourse({ course, lessons, documents, importedAt, ro
             <div className="space-y-6 p-6">
               <div><h3 className="font-bold">The idea, simply explained</h3><p className="mt-3 text-sm leading-7 text-grey">{active.explanation}</p></div>
               <div><h3 className="font-bold">An example to explore</h3><pre className="mt-3 overflow-x-auto rounded-2xl border border-white/10 bg-[#070b14] p-4 text-xs leading-6 text-white/90"><code>{active.example}</code></pre><p className="mt-2 text-xs leading-5 text-grey">Original illustrative code, pseudocode or flow—not a transcript or a command to run blindly.</p></div>
-              {active.sourceIds.length ? active.sourceIds.map((id) => <SourceNotes key={`${active.id}-${id}`} document={documents.find((document) => document.id === id)!} importedAt={importedAt} />) : <p className="rounded-2xl border border-white/10 p-4 text-sm leading-6 text-grey">No matching GitHub document is attached to this lesson. The explanation, example, quiz and task here are original companion material; they do not claim the exact demonstration or problem shown in the video.</p>}
+              <SourceNotes key={active.id} documents={documents.filter((document) => active.sourceIds.includes(document.id))} importedAt={importedAt} study={{
+                label: active.label, definition: active.explanation, example: active.example, guide: active.studyGuide,
+                question: active.assessment.question, answer: active.assessment.options[active.assessment.answer],
+                assignment: active.assessment.assignment, criteria: active.assessment.criteria,
+              }} />
               <div id="assessment" className="scroll-mt-6"><LessonAssessment key={active.id} day={lessons.indexOf(active) + 1} label={active.label} assessment={active.assessment} storageKey={`itkannadigaru-assessment-${course.playlistId}-${active.id}-v1`} /></div>
             </div>
           </div>

@@ -122,3 +122,30 @@ assignment checks remain separate from videos-opened progress and manual course
 completion. The Python pilot's original storage keys are preserved. Certificates
 are downloadable through print/save-as-PDF; no email, verified grading or
 professional credential is provided.
+
+Certificates retain the white-and-gold landscape design and recognize
+completion using the learner's name, course title and channel slogan, without
+lesson counts or additional qualification wording on the PDF. The course page
+still explains that completion is self-reported; no accreditation, independent
+verification or professional credits are claimed.
+An original gold ITK learning seal appears on the certificate. It is a vector
+brand badge, not an accreditation mark or a copy of the YouTube channel logo.
+
+### Student-style study notes
+
+Every lesson's expanded reader begins with a contextual study guide: the core
+idea, a mental model, a worked example explained step by step, a common mistake,
+a concise revision card, an ungraded recall prompt and a practical task.
+`src/lib/course-study-guides.ts` covers the 120 non-pilot lessons;
+`src/lib/python-study-guides.ts` covers the 23 Python for AI lessons. Guides are
+keyed by video ID, so shared notebooks do not produce identical day-level notes.
+Missing guides fail explicitly rather than showing generic filler.
+
+The reader includes section navigation and works even without an attached
+GitHub module. Original source documents remain unchanged in separately
+expandable reference sections with pinned attribution. Importing a fresh source
+snapshot does not overwrite these authored explanations. Review a guide's
+examples and walkthrough together whenever lesson content changes.
+
+The reader's recall disclosure is a revision aid only: it does not submit an
+assessment, mark a task complete or change certificate eligibility.
