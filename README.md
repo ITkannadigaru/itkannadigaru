@@ -19,7 +19,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Geist, Geist Mono and Noto Sans Kannada are self-hosted through Fontsource
+packages. Their font files are bundled into the static export, so builds do not
+need to fetch Google Fonts. Their licenses are in `public/font-licenses/`.
 
 ## Learn More
 
@@ -86,6 +88,11 @@ learner chooses and performs those actions there. They are optional and the
 website does not submit actions on a learner's behalf.
 The first embedded player opened per browser tab shows a dismissible reminder
 outside the video; session storage keeps it from appearing again in that tab.
+After one minute of player-reported playback (excluding pauses and buffering),
+a separate optional prompt offers to continue on YouTube. It never interrupts
+playback or redirects automatically, and the YouTube link may start from the
+beginning. The player API is loaded only when a learner opens a video; if it is
+unavailable, the regular YouTube link remains available.
 
 ## Learning path
 

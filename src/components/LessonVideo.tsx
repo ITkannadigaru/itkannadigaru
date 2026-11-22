@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ExternalLink, Play, X } from "lucide-react";
 import { SOCIAL_LINKS } from "@/lib/links";
+import EmbeddedLessonPlayer from "@/components/EmbeddedLessonPlayer";
 
 const REMINDER_KEY = "itkannadigaru-youtube-reminder-seen";
 
@@ -35,20 +36,11 @@ export default function LessonVideo({ videoId, title, playlistId, loaded, onLoad
 
   return (
     <section id="video-player" className="mt-6 scroll-mt-6" aria-label="Lesson video">
-      <div className="aspect-video overflow-hidden rounded-2xl border border-white/10 bg-background">
-        {loaded ? <iframe
-          key={videoId}
-          src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=0&playsinline=1&rel=0`}
-          title={`YouTube lesson: ${title}`}
-          className="h-full w-full"
-          allow="encrypted-media; fullscreen; picture-in-picture"
-          allowFullScreen
-          referrerPolicy="strict-origin-when-cross-origin"
-        /> : <button type="button" onClick={onLoad} aria-label={`Load video player: ${title}`} className="relative flex h-full w-full items-center justify-center bg-cover bg-center" style={{ backgroundImage: `url(https://i.ytimg.com/vi/${videoId}/hqdefault.jpg)` }}>
+      {loaded ? <EmbeddedLessonPlayer key={videoId} videoId={videoId} title={title} youtubeUrl={url} onOpenYouTube={onOpenYouTube} /> :
+        <div className="aspect-video min-h-[200px] overflow-hidden rounded-2xl border border-white/10 bg-background"><button type="button" onClick={onLoad} aria-label={`Load video player: ${title}`} className="relative flex h-full w-full items-center justify-center bg-cover bg-center" style={{ backgroundImage: `url(https://i.ytimg.com/vi/${videoId}/hqdefault.jpg)` }}>
           <span className="absolute inset-0 bg-black/30" />
           <span className="relative inline-flex items-center gap-2 rounded-full bg-yellow px-5 py-3 text-sm font-bold text-background"><Play size={20} />Load YouTube player</span>
-        </button>}
-      </div>
+        </button></div>}
       <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
         <p className="text-xs leading-5 text-grey">{loaded ? "Press Play in the YouTube player. No automatic playback." : "Watch here, then read and practise below."}</p>
         <a href={url} onClick={onOpenYouTube} onAuxClick={(event) => { if (event.button === 1) onOpenYouTube(); }} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs font-bold text-yellow">Open on YouTube<ExternalLink size={14} /></a>
