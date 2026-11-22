@@ -123,6 +123,14 @@ completion. The Python pilot's original storage keys are preserved. Certificates
 are downloadable through print/save-as-PDF; no email, verified grading or
 professional credential is provided.
 
+Certificates retain the white-and-gold landscape design and recognize
+completion using the learner's name, course title and channel slogan, without
+lesson counts or additional qualification wording on the PDF. The course page
+still explains that completion is self-reported; no accreditation, independent
+verification or professional credits are claimed.
+An original gold ITK learning seal appears on the certificate. It is a vector
+brand badge, not an accreditation mark or a copy of the YouTube channel logo.
+
 ### Student-style study notes
 
 Every lesson's expanded reader begins with a contextual study guide: the core
