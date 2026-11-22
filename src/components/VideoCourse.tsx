@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, BookOpen, CheckCircle2, Play, Sparkles } from "lucide-react";
 import type { catalog } from "@/lib/catalog";
 import type { CourseLesson, roadmaps } from "@/lib/course-lessons";
@@ -22,6 +22,7 @@ export default function VideoCourse({ course, lessons, documents, importedAt, ro
   const openedCount = course.videos.filter((video) => opened.includes(video.id)).length;
   const percent = course.videos.length ? Math.round((openedCount / course.videos.length) * 100) : 0;
   const [activeId, setActiveId] = useState(lessons[0].id);
+  const notesRef = useRef<HTMLElement>(null);
   const [completed, setCompleted] = useState<string[]>([]);
   const [loaded, setLoaded] = useState(false);
   const [completionError, setCompletionError] = useState("");
@@ -47,6 +48,11 @@ export default function VideoCourse({ course, lessons, documents, importedAt, ro
     }, 0);
     return () => window.clearTimeout(timer);
   }, [completionKey, lessons]);
+
+  function selectLesson(id: string) {
+    setActiveId(id);
+    if (notesRef.current) notesRef.current.scrollTop = 0;
+  }
 
   function toggleComplete(id: string) {
     const next = completed.includes(id) ? completed.filter((item) => item !== id) : [...completed, id];
@@ -104,14 +110,14 @@ export default function VideoCourse({ course, lessons, documents, importedAt, ro
               </div>
               <div className="mt-4 flex flex-wrap gap-2">
                 <a href={url} onClick={() => markOpened(lesson.id)} onAuxClick={(event) => { if (event.button === 1) markOpened(lesson.id); }} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-yellow px-4 py-2 text-xs font-bold text-background"><Play size={14} />Watch video<span className="sr-only"> {lesson.label}</span></a>
-                <a href="#notes" onClick={() => setActiveId(lesson.id)} className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-xs font-semibold"><BookOpen size={14} />Read notes<span className="sr-only"> {lesson.label}</span></a>
-                <a href="#assessment" onClick={() => setActiveId(lesson.id)} className="rounded-full border border-purple-400/30 px-4 py-2 text-xs font-semibold text-purple-300">Quiz & assignment<span className="sr-only"> {lesson.label}</span></a>
+                <a href="#notes" onClick={() => selectLesson(lesson.id)} className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-xs font-semibold"><BookOpen size={14} />Read notes<span className="sr-only"> {lesson.label}</span></a>
+                <a href="#assessment" onClick={() => selectLesson(lesson.id)} className="rounded-full border border-purple-400/30 px-4 py-2 text-xs font-semibold text-purple-300">Quiz & assignment<span className="sr-only"> {lesson.label}</span></a>
                 <button type="button" disabled={!loaded} onClick={() => toggleComplete(lesson.id)} aria-pressed={done} className="inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-xs font-semibold text-grey disabled:opacity-50"><CheckCircle2 size={14} />{done ? "Undo completion" : "Mark complete"}<span className="sr-only"> {lesson.label}</span></button>
               </div>
             </article>;
           })}</div>
         </section>
-        <aside id="notes" className="min-w-0 scroll-mt-6 lg:sticky lg:top-6">
+        <aside id="notes" ref={notesRef} tabIndex={0} aria-label="Lesson notes and practice" className="course-notes-panel min-w-0 scroll-mt-6 rounded-3xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow lg:sticky lg:top-6">
           <div className="rounded-3xl border border-white/10 bg-card/70">
             <div className="rounded-t-3xl border-b border-white/10 bg-gradient-to-br from-blue-950/70 to-yellow/5 p-6">
               <p className="text-xs font-bold uppercase tracking-widest text-yellow">BEGINNER NOTES / {active.label}</p>

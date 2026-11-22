@@ -24,7 +24,7 @@ export default function Home() {
           <div>
             <p className="inline-flex items-center gap-2 rounded-full border border-yellow/20 bg-yellow/5 px-4 py-2 text-xs font-bold tracking-wider text-yellow"><Sparkles size={14} /> LEARN TECH IN KANNADA</p>
             <p className="mt-6 font-kannada text-lg font-semibold text-white">ನಮಸ್ಕಾರ 👋 I&apos;m Manoj, founder of ITKannadigaru.</p>
-            <h1 className="mt-6 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight sm:text-6xl">ನಿಮ್ಮ ಕನಸು.<br /><span className="text-yellow">ನಿಮ್ಮ learning journey.</span></h1>
+            <h1 lang="kn" className="font-kannada mt-6 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight sm:text-6xl">ಕನಸು ನಿಮ್ಮದು.<br /><span className="text-yellow">ದಾರಿ ನಮ್ಮದು</span></h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-grey">From your first line of Python to building with AI. Learn step by step, with free Kannada videos and beginner-friendly notes.</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href="#courses" className="inline-flex items-center gap-2 rounded-full bg-yellow px-6 py-3.5 font-bold text-background transition hover:brightness-110">Start your journey <ArrowRight size={18} /></a>
@@ -32,7 +32,7 @@ export default function Home() {
             </div>
             <p className="mt-8 text-sm text-grey">✦ Free to learn <span className="mx-3 text-white/20">|</span> Kannada videos <span className="mx-3 text-white/20">|</span> Learn at your pace</p>
           </div>
-          <div className="h-[400px] sm:h-[500px] lg:h-[550px]">
+          <div className="h-[440px] sm:h-[560px] lg:h-[660px]">
             <KarnatakaMap />
           </div>
         </div>

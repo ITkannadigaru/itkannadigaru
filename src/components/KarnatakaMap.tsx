@@ -3,7 +3,7 @@ import { assetPath } from "@/lib/assets";
 
 export default function KarnatakaMap() {
   return (
-    <div className="map-stage relative mx-auto h-full w-full max-w-[500px]">
+    <div className="map-stage relative mx-auto h-full w-full max-w-[600px]">
       <div className="map-aura" aria-hidden="true" />
       <div className="map-orbit map-orbit-outer" aria-hidden="true" />
       <div className="map-orbit map-orbit-inner" aria-hidden="true" />
@@ -17,8 +17,8 @@ export default function KarnatakaMap() {
           alt=""
           fill
           priority
-          sizes="(max-width: 640px) 90vw, 500px"
-          className="object-contain mix-blend-screen"
+          sizes="(max-width: 640px) 100vw, 660px"
+          className="scale-110 object-contain mix-blend-screen lg:scale-120"
         />
         <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
           <div className="max-w-[74%] -translate-y-1">

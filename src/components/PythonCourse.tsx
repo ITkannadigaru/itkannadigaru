@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { ArrowLeft, ArrowRight, BookOpen, Check, CheckCircle2, ExternalLink, Play, RotateCcw, Sparkles } from "lucide-react";
@@ -30,6 +30,7 @@ function Robot({ percent }: { percent: number }) {
 export default function PythonCourse() {
   const [completed, setCompleted] = useState<number[]>([]);
   const [activeDay, setActiveDay] = useState(1);
+  const notesRef = useRef<HTMLElement>(null);
   const [storageError, setStorageError] = useState("");
   const [loaded, setLoaded] = useState(false);
   const { opened, error: openedError, markOpened } = useOpenedVideos("itkannadigaru-python-for-ai-opened-v1");
@@ -56,6 +57,11 @@ export default function PythonCourse() {
     }, 0);
     return () => window.clearTimeout(timer);
   }, []);
+
+  function selectLesson(day: number) {
+    setActiveDay(day);
+    if (notesRef.current) notesRef.current.scrollTop = 0;
+  }
 
   function toggleDay(day: number) {
     const next = completed.includes(day) ? completed.filter((item) => item !== day) : [...completed, day];
@@ -112,8 +118,8 @@ export default function PythonCourse() {
                     <div className="flex items-start gap-4"><a href={`https://www.youtube.com/watch?v=${item.video}&list=PLb7POK22N8U0`} onClick={() => markOpened(item.video)} onAuxClick={(event) => { if (event.button === 1) markOpened(item.video); }} target="_blank" rel="noopener noreferrer" aria-label={`Watch day ${item.day}: ${item.title} on YouTube`} className="relative aspect-video w-28 shrink-0 overflow-hidden rounded-xl bg-cover bg-center sm:w-36" style={{ backgroundImage: `url(https://i.ytimg.com/vi/${item.video}/hqdefault.jpg)` }}><span className="absolute inset-0 flex items-center justify-center bg-black/20"><Play size={24} className="text-white" fill="currentColor" /></span></a><div className="min-w-0 flex-1"><p className="text-xs font-bold uppercase tracking-wider text-grey">Day {item.day}{done ? " · Completed" : opened.includes(item.video) ? " · Opened" : ""}</p><h3 className="mt-1 font-bold">{item.title}</h3><p className="mt-2 text-sm leading-6 text-grey">{item.summary}</p></div><div className={`hidden h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-bold sm:flex ${done ? "bg-green-500/15 text-green-400" : "bg-white/5 text-yellow"}`}>{done ? <Check size={18} /> : String(item.day).padStart(2, "0")}</div></div>
                     <div className="mt-4 flex flex-wrap gap-2 pl-0 sm:pl-14">
                       <a href={`https://www.youtube.com/watch?v=${item.video}&list=PLb7POK22N8U0`} onClick={() => markOpened(item.video)} onAuxClick={(event) => { if (event.button === 1) markOpened(item.video); }} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-yellow px-4 py-2 text-xs font-bold text-background hover:brightness-110"><Play size={14} /> Watch video <span className="sr-only">for day {item.day}</span></a>
-                      <a href="#notes" onClick={() => setActiveDay(item.day)} className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-xs font-semibold hover:border-yellow"><BookOpen size={14} /> Read notes <span className="sr-only">for day {item.day}</span></a>
-                      <a href="#assessment" onClick={() => setActiveDay(item.day)} className="inline-flex items-center gap-2 rounded-full border border-purple-400/30 px-4 py-2 text-xs font-semibold text-purple-300 hover:border-purple-300">Quiz & assignment <span className="sr-only">for day {item.day}</span></a>
+                      <a href="#notes" onClick={() => selectLesson(item.day)} className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-xs font-semibold hover:border-yellow"><BookOpen size={14} /> Read notes <span className="sr-only">for day {item.day}</span></a>
+                      <a href="#assessment" onClick={() => selectLesson(item.day)} className="inline-flex items-center gap-2 rounded-full border border-purple-400/30 px-4 py-2 text-xs font-semibold text-purple-300 hover:border-purple-300">Quiz & assignment <span className="sr-only">for day {item.day}</span></a>
                       <button type="button" disabled={!loaded} onClick={() => toggleDay(item.day)} aria-pressed={done} className="inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-xs font-semibold text-grey hover:text-white disabled:opacity-50">{done ? <RotateCcw size={14} /> : <CheckCircle2 size={14} />}{done ? "Undo" : "Mark complete"} <span className="sr-only">day {item.day}</span></button>
                     </div>
                   </article>
@@ -121,7 +127,7 @@ export default function PythonCourse() {
               })}
             </div>
           </section>
-          <aside id="notes" className="min-w-0 scroll-mt-6 lg:sticky lg:top-6">
+          <aside id="notes" ref={notesRef} tabIndex={0} aria-label="Lesson notes and practice" className="course-notes-panel min-w-0 scroll-mt-6 rounded-3xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow lg:sticky lg:top-6">
             <div className="overflow-hidden rounded-3xl border border-white/10 bg-card/70">
               <div className="border-b border-white/10 bg-gradient-to-br from-blue-950/70 to-yellow/5 p-7 sm:p-8">
                 <p className="text-xs font-bold tracking-[0.2em] text-yellow">BEGINNER NOTES / DAY {lesson.day}</p>
