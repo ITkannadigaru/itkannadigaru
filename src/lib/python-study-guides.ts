@@ -7,6 +7,7 @@ export type StudyGuide = {
 };
 
 export type StudyLesson = {
+  videoId: string;
   label: string;
   definition: string;
   example: string;

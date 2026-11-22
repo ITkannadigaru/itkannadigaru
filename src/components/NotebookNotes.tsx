@@ -11,7 +11,7 @@ export default function NotebookNotes({ lesson }: { lesson: Lesson }) {
   const documents = notebook ? [{ ...notebook[1], id: notebook[0], title: notebook[0], commit: notebooks.commit }] : [];
   const assessment = assessments[lesson.day];
   return <SourceNotes documents={documents} importedAt={notebooks.importedAt} study={{
-    label: `Day ${lesson.day}`, definition: lesson.explanation, example: lesson.code,
+    videoId: lesson.video, label: `Day ${lesson.day}`, definition: lesson.explanation, example: lesson.code,
     guide: getPythonStudyGuide(lesson.video), question: assessment.question,
     answer: assessment.options[assessment.answer], assignment: assessment.assignment, criteria: assessment.criteria,
   }} />;

@@ -5,6 +5,16 @@ import { lessons } from "@/lib/python-lessons";
 import AIRoadmap from "@/components/AIRoadmap";
 import { catalog } from "@/lib/catalog";
 import KarnatakaMap from "@/components/KarnatakaMap";
+import ContinueLearning from "@/components/ContinueLearning";
+import { getCourseLessons } from "@/lib/course-lessons";
+
+const resumeCourses = [
+  { slug: "python-for-ai", title: "Python for AI", lessons: lessons.map((lesson) => ({ id: lesson.video, title: lesson.title, label: `Day ${lesson.day}` })) },
+  ...catalog.map((course) => ({
+    slug: course.slug, title: course.title,
+    lessons: getCourseLessons(course).map((lesson) => ({ id: lesson.id, title: lesson.title, label: lesson.label })),
+  })),
+];
 
 export default function Home() {
   return (
@@ -45,6 +55,7 @@ export default function Home() {
           <p className="text-xs font-bold tracking-[0.2em] text-yellow">START YOUR COURSE</p>
           <h2 className="mt-3 text-3xl font-extrabold sm:text-4xl">Small steps. Real skills.</h2>
           <p className="mt-3 text-grey">Choose a course, follow its roadmap, then watch, read, practise and build.</p>
+          <ContinueLearning courses={resumeCourses} />
           <div className="mt-10 grid overflow-hidden rounded-3xl border border-yellow/20 bg-card lg:grid-cols-[0.8fr_1.2fr]">
             <div className="relative flex min-h-64 items-center justify-center overflow-hidden bg-gradient-to-br from-blue-950 via-[#121c31] to-yellow/10">
               <div className="bg-circuit-grid absolute inset-0 opacity-30" aria-hidden="true" />

@@ -8,12 +8,18 @@ import { lessons } from "@/lib/python-lessons";
 import { useOpenedVideos } from "@/lib/use-opened-videos";
 import LessonAssessment from "@/components/LessonAssessment";
 import CourseCertificate from "@/components/CourseCertificate";
+import { useLessonResume } from "@/lib/use-lesson-resume";
+import LessonSearch from "@/components/LessonSearch";
+import LessonNavigation from "@/components/LessonNavigation";
+import LessonVideo from "@/components/LessonVideo";
+import CourseProject from "@/components/CourseProject";
 
 const NotebookNotes = dynamic(() => import("@/components/NotebookNotes"), {
   loading: () => <p className="text-sm text-grey" role="status">Loading source notebook…</p>,
 });
 
 const STORAGE_KEY = "itkannadigaru-python-for-ai-progress-v1";
+const VIDEO_IDS = lessons.map((lesson) => lesson.video);
 
 function Robot({ percent }: { percent: number }) {
   return (
@@ -29,12 +35,18 @@ function Robot({ percent }: { percent: number }) {
 
 export default function PythonCourse() {
   const [completed, setCompleted] = useState<number[]>([]);
-  const [activeDay, setActiveDay] = useState(1);
+  const resume = useLessonResume("python-for-ai", VIDEO_IDS);
+  const [query, setQuery] = useState("");
+  const [playerId, setPlayerId] = useState<string | null>(null);
   const notesRef = useRef<HTMLElement>(null);
   const [storageError, setStorageError] = useState("");
   const [loaded, setLoaded] = useState(false);
   const { opened, error: openedError, markOpened } = useOpenedVideos("itkannadigaru-python-for-ai-opened-v1");
-  const lesson = lessons.find((item) => item.day === activeDay) ?? lessons[0];
+  const lesson = lessons.find((item) => item.video === resume.activeId)!;
+  const activeDay = lesson.day;
+  const activeIndex = lessons.indexOf(lesson);
+  const search = query.trim().toLocaleLowerCase();
+  const visibleLessons = lessons.filter((item) => `Day ${item.day} ${item.title} ${item.summary}`.toLocaleLowerCase().includes(search));
   const openedCount = lessons.filter((item) => opened.includes(item.video)).length;
   const percent = Math.round((openedCount / lessons.length) * 100);
   const allComplete = completed.length === lessons.length;
@@ -59,8 +71,23 @@ export default function PythonCourse() {
   }, []);
 
   function selectLesson(day: number) {
-    setActiveDay(day);
+    const item = lessons.find((item) => item.day === day)!;
+    resume.selectLesson(item.video);
+    if (day !== activeDay) setPlayerId(null);
     if (notesRef.current) notesRef.current.scrollTop = 0;
+  }
+
+  function watchLesson(day: number) {
+    selectLesson(day);
+    const item = lessons.find((item) => item.day === day)!;
+    setPlayerId(item.video);
+    markOpened(item.video);
+  }
+
+  function openYouTube(day: number) {
+    selectLesson(day);
+    setPlayerId(null);
+    markOpened(lessons.find((item) => item.day === day)!.video);
   }
 
   function toggleDay(day: number) {
@@ -91,7 +118,8 @@ export default function PythonCourse() {
               <h1 className="mt-4 text-4xl font-extrabold sm:text-5xl">Your Python journey<br /><span className="text-yellow">starts here.</span></h1>
               <p className="mt-5 max-w-xl leading-7 text-grey">Watch in Kannada, read the notes, and practise one day at a time. This foundation follows the published Python for AI playlist.</p>
               <div className="mt-6 flex flex-wrap gap-2 text-xs font-semibold"><span className="rounded-full border border-white/10 px-3 py-1.5">🐍 Beginner</span><span className="rounded-full border border-white/10 px-3 py-1.5">{lessons.length} published lessons</span><span className="rounded-full border border-white/10 px-3 py-1.5">Free · Kannada videos</span></div>
-              <a href="#lessons" className="mt-8 inline-flex items-center gap-2 rounded-full bg-yellow px-6 py-3 font-bold text-background hover:brightness-110">Explore lessons <ArrowRight size={17} /></a>
+              <a href={resume.resumeId ? "#notes" : "#lessons"} onClick={resume.resumeId ? () => selectLesson(activeDay) : undefined} className="mt-8 inline-flex items-center gap-2 rounded-full bg-yellow px-6 py-3 font-bold text-background hover:brightness-110">{resume.resumeId ? `Continue learning · Day ${activeDay}` : "Explore lessons"} <ArrowRight size={17} /></a>
+              <a href="#course-project" className="ml-4 mt-4 inline-block text-sm font-bold text-yellow underline underline-offset-4">Explore final project</a>
             </div>
             <div className="rounded-3xl border border-white/10 bg-card/80 p-6 sm:p-8">
               <div className="flex items-start justify-between"><div><p className="text-xs font-bold tracking-widest text-grey">VIDEOS OPENED</p><p className="mt-3 text-3xl font-extrabold">{percent}% <span className="text-sm font-normal text-grey">opened</span></p></div><div className="rounded-2xl bg-yellow/10 p-3 text-yellow"><Sparkles size={22} /></div></div>
@@ -100,6 +128,7 @@ export default function PythonCourse() {
               <p className="mt-2 text-xs leading-5 text-grey">Opening a video does not confirm you watched it. Mark lessons complete yourself after watching; {completed.length} of {lessons.length} marked complete. Progress stays on this device and is not synced.</p>
               {storageError && <p role="alert" className="mt-3 text-sm text-red-300">{storageError}</p>}
               {openedError && <p role="alert" className="mt-3 text-sm text-red-300">{openedError}</p>}
+              {resume.error && <p role="alert" className="mt-3 text-sm text-orange-200">{resume.error}</p>}
               {allComplete && <a href="#certificate" className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-yellow">Your certificate is ready <ArrowRight size={16} /></a>}
             </div>
           </div>
@@ -110,14 +139,15 @@ export default function PythonCourse() {
             <p className="text-xs font-bold tracking-[0.2em] text-yellow">YOUR CURRICULUM</p>
             <h2 className="mt-3 text-3xl font-extrabold">One day at a time.</h2>
             <p className="mt-3 text-sm leading-6 text-grey">Watch, read the source notebook, check your understanding, then build the assignment.</p>
+            <LessonSearch query={query} onChange={setQuery} count={visibleLessons.length} total={lessons.length} />
             <div className="mt-7 space-y-3">
-              {lessons.map((item) => {
+              {visibleLessons.map((item) => {
                 const done = completed.includes(item.day);
                 return (
                   <article key={item.day} className={`rounded-2xl border p-5 transition ${activeDay === item.day ? "border-yellow/50 bg-yellow/[0.04]" : "border-white/10 bg-card/50"}`}>
-                    <div className="flex items-start gap-4"><a href={`https://www.youtube.com/watch?v=${item.video}&list=PLb7POK22N8U0`} onClick={() => markOpened(item.video)} onAuxClick={(event) => { if (event.button === 1) markOpened(item.video); }} target="_blank" rel="noopener noreferrer" aria-label={`Watch day ${item.day}: ${item.title} on YouTube`} className="relative aspect-video w-28 shrink-0 overflow-hidden rounded-xl bg-cover bg-center sm:w-36" style={{ backgroundImage: `url(https://i.ytimg.com/vi/${item.video}/hqdefault.jpg)` }}><span className="absolute inset-0 flex items-center justify-center bg-black/20"><Play size={24} className="text-white" fill="currentColor" /></span></a><div className="min-w-0 flex-1"><p className="text-xs font-bold uppercase tracking-wider text-grey">Day {item.day}{done ? " · Completed" : opened.includes(item.video) ? " · Opened" : ""}</p><h3 className="mt-1 font-bold">{item.title}</h3><p className="mt-2 text-sm leading-6 text-grey">{item.summary}</p></div><div className={`hidden h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-bold sm:flex ${done ? "bg-green-500/15 text-green-400" : "bg-white/5 text-yellow"}`}>{done ? <Check size={18} /> : String(item.day).padStart(2, "0")}</div></div>
+                    <div className="flex items-start gap-4"><a href={`https://www.youtube.com/watch?v=${item.video}&list=PLb7POK22N8U0`} onClick={() => openYouTube(item.day)} onAuxClick={(event) => { if (event.button === 1) openYouTube(item.day); }} target="_blank" rel="noopener noreferrer" aria-label={`Open on YouTube: day ${item.day}: ${item.title}`} className="relative aspect-video w-28 shrink-0 overflow-hidden rounded-xl bg-cover bg-center sm:w-36" style={{ backgroundImage: `url(https://i.ytimg.com/vi/${item.video}/hqdefault.jpg)` }}><span className="absolute inset-0 flex items-center justify-center bg-black/20"><Play size={24} className="text-white" fill="currentColor" /></span></a><div className="min-w-0 flex-1"><p className="text-xs font-bold uppercase tracking-wider text-grey">Day {item.day}{done ? " · Completed" : opened.includes(item.video) ? " · Opened" : ""}</p><h3 className="mt-1 font-bold">{item.title}</h3><p className="mt-2 text-sm leading-6 text-grey">{item.summary}</p></div><div className={`hidden h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-bold sm:flex ${done ? "bg-green-500/15 text-green-400" : "bg-white/5 text-yellow"}`}>{done ? <Check size={18} /> : String(item.day).padStart(2, "0")}</div></div>
                     <div className="mt-4 flex flex-wrap gap-2 pl-0 sm:pl-14">
-                      <a href={`https://www.youtube.com/watch?v=${item.video}&list=PLb7POK22N8U0`} onClick={() => markOpened(item.video)} onAuxClick={(event) => { if (event.button === 1) markOpened(item.video); }} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-yellow px-4 py-2 text-xs font-bold text-background hover:brightness-110"><Play size={14} /> Watch video <span className="sr-only">for day {item.day}</span></a>
+                      <a href="#video-player" onClick={() => watchLesson(item.day)} className="inline-flex items-center gap-2 rounded-full bg-yellow px-4 py-2 text-xs font-bold text-background hover:brightness-110"><Play size={14} /> Watch video <span className="sr-only">for day {item.day}</span></a>
                       <a href="#notes" onClick={() => selectLesson(item.day)} className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-xs font-semibold hover:border-yellow"><BookOpen size={14} /> Read notes <span className="sr-only">for day {item.day}</span></a>
                       <a href="#assessment" onClick={() => selectLesson(item.day)} className="inline-flex items-center gap-2 rounded-full border border-purple-400/30 px-4 py-2 text-xs font-semibold text-purple-300 hover:border-purple-300">Quiz & assignment <span className="sr-only">for day {item.day}</span></a>
                       <button type="button" disabled={!loaded} onClick={() => toggleDay(item.day)} aria-pressed={done} className="inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-xs font-semibold text-grey hover:text-white disabled:opacity-50">{done ? <RotateCcw size={14} /> : <CheckCircle2 size={14} />}{done ? "Undo" : "Mark complete"} <span className="sr-only">day {item.day}</span></button>
@@ -133,10 +163,8 @@ export default function PythonCourse() {
                 <p className="text-xs font-bold tracking-[0.2em] text-yellow">BEGINNER NOTES / DAY {lesson.day}</p>
                 <h2 className="mt-3 text-2xl font-extrabold sm:text-3xl">{lesson.title}</h2>
                 <p className="mt-3 leading-7 text-grey">{lesson.summary}</p>
-                <a href={`https://www.youtube.com/watch?v=${lesson.video}&list=PLb7POK22N8U0`} onClick={() => markOpened(lesson.video)} onAuxClick={(event) => { if (event.button === 1) markOpened(lesson.video); }} target="_blank" rel="noopener noreferrer" aria-label={`Watch day ${lesson.day}: ${lesson.title} on YouTube`} className="group relative mt-6 flex aspect-video max-w-md items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-cover bg-center" style={{ backgroundImage: `url(https://i.ytimg.com/vi/${lesson.video}/hqdefault.jpg)` }}>
-                  <span className="absolute inset-0 bg-black/25 transition group-hover:bg-black/40" />
-                  <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-yellow text-background shadow-lg"><Play size={22} fill="currentColor" /></span>
-                </a>
+                <LessonNavigation index={activeIndex} total={lessons.length} onSelect={(index) => selectLesson(lessons[index].day)} />
+                <LessonVideo videoId={lesson.video} title={lesson.title} playlistId="PLb7POK22N8U0" loaded={playerId === lesson.video} onLoad={() => watchLesson(lesson.day)} onOpenYouTube={() => openYouTube(lesson.day)} />
                 <div className="mt-6 flex flex-wrap items-center gap-2 text-xs font-bold text-grey"><span className="rounded-lg border border-white/10 bg-background/70 px-3 py-2">LEARN</span><ArrowRight size={14} /><span className="rounded-lg border border-white/10 bg-background/70 px-3 py-2">TRY</span><ArrowRight size={14} /><span className="rounded-lg border border-yellow/20 bg-yellow/5 px-3 py-2 text-yellow">BUILD</span></div>
               </div>
               <div className="space-y-7 p-7 sm:p-8">
@@ -147,12 +175,15 @@ export default function PythonCourse() {
                 <div id="assessment" className="scroll-mt-6">
                   <LessonAssessment key={lesson.day} day={lesson.day} />
                 </div>
-                <div className="flex flex-wrap gap-4 text-sm"><a href={`https://www.youtube.com/watch?v=${lesson.video}&list=PLb7POK22N8U0`} onClick={() => markOpened(lesson.video)} onAuxClick={(event) => { if (event.button === 1) markOpened(lesson.video); }} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-semibold text-yellow">Watch day {lesson.day} <ExternalLink size={14} /></a>{lesson.source && <a href={lesson.source} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-grey hover:text-white">Explore related notebook <ExternalLink size={14} /></a>}</div>
+                <LessonNavigation index={activeIndex} total={lessons.length} onSelect={(index) => selectLesson(lessons[index].day)} />
+                <div className="flex flex-wrap gap-4 text-sm"><a href={`https://www.youtube.com/watch?v=${lesson.video}&list=PLb7POK22N8U0`} onClick={() => openYouTube(lesson.day)} onAuxClick={(event) => { if (event.button === 1) openYouTube(lesson.day); }} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-semibold text-yellow">Open day {lesson.day} on YouTube <ExternalLink size={14} /></a>{lesson.source && <a href={lesson.source} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-grey hover:text-white">Explore related notebook <ExternalLink size={14} /></a>}</div>
+                <a href="#course-project" className="inline-block text-sm font-bold text-yellow">Put your skills together: final project →</a>
                 <p className="text-xs leading-5 text-grey">These short notes are a learning companion to the video. Some examples are illustrative and may differ from the lesson demonstration.</p>
               </div>
             </div>
           </aside>
         </div>
+        <CourseProject slug="python-for-ai" />
       </main>
       <CourseCertificate title="Python for AI" count={lessons.length} complete={allComplete} />
     </>
