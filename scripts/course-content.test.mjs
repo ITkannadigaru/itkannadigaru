@@ -36,6 +36,50 @@ const { getCourseProject } = load("src/lib/course-projects.ts");
 const { lessonVisuals } = load("src/lib/lesson-visuals.ts");
 const { safeReturnPath } = load("src/lib/visitor-session.ts");
 const { profileName } = load("src/lib/profile.ts");
+const { createPlaybackTimer } = load("src/lib/playback-timer.ts");
+
+test("YouTube prompt counts playing time only and fires once", () => {
+  let now = 0;
+  let nextId = 0;
+  let calls = 0;
+  const timers = new Map();
+  const scheduler = {
+    now: () => now,
+    schedule: (callback, delay) => { const id = ++nextId; timers.set(id, { callback, at: now + delay }); return id; },
+    cancel: (id) => timers.delete(id),
+  };
+  function advance(ms) {
+    now += ms;
+    for (const [id, timer] of timers) {
+      if (timer.at <= now) { timers.delete(id); timer.callback(); }
+    }
+  }
+  const timer = createPlaybackTimer(() => { calls++; }, scheduler);
+  advance(120000);
+  timer.setState(1);
+  timer.setState(1);
+  advance(29000);
+  timer.setState(2);
+  advance(120000);
+  timer.setState(1);
+  advance(30000);
+  assert.equal(calls, 0);
+  advance(1000);
+  assert.equal(calls, 1);
+  timer.setState(1);
+  advance(60000);
+  assert.equal(calls, 1);
+  const disposed = createPlaybackTimer(() => { calls++; }, scheduler);
+  disposed.setState(1);
+  disposed.dispose();
+  advance(60000);
+  assert.equal(calls, 1);
+  const atBoundary = createPlaybackTimer(() => { calls++; }, scheduler);
+  atBoundary.setState(1);
+  now += 60000;
+  atBoundary.setState(2);
+  assert.equal(calls, 2);
+});
 
 test("profile names prefer learner edits and fall back to Google names", () => {
   assert.equal(profileName({ display_name: "  Anu  ", full_name: "Google Name", name: "Other" }), "Anu");

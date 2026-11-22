@@ -9,6 +9,9 @@
   --blue: #2563eb;
   --purple: #7c3aed;
   --grey: #9ca3af;
+  --font-geist-sans: "Geist Variable";
+  --font-geist-mono: "Geist Mono Variable";
+  --font-noto-kannada: "Noto Sans Kannada Variable";
 }
 
 @theme inline {
